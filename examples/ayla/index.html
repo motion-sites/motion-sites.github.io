@@ -1,0 +1,621 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ayla Beauty Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Marck+Script&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: dark moss single column; organic blob photos, ghost script words behind headings, palm fronds at the edges, round category photos, sticky booking bar */
+:root{
+  --bg:#141A13; --bg2:#1C241A; --card:#232C21; --ink:#EDEBDF; --muted:#A3A893; --line:#344031;
+  --moss:#A7B784; --moss-ink:#141A13; --leaf:#3E5A34; --glow:#F2D9A6;
+  --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --script:"Marck Script", "Cormorant Garamond", Georgia, serif;
+  --body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;-webkit-text-size-adjust:100%}
+.leaves{position:absolute;top:0;left:0;right:0;height:2600px;overflow:hidden;pointer-events:none;z-index:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;overflow-x:hidden;overflow-x:clip;position:relative;width:100%;max-width:100vw;
+  background-image:radial-gradient(90% 50% at 100% 0%, #2B3A26 0%, transparent 60%),radial-gradient(80% 40% at 0% 45%, #233020 0%, transparent 60%),radial-gradient(90% 40% at 100% 85%, #26331F 0%, transparent 60%)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+.wrap{max-width:620px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:0 150px;position:relative;overflow-x:clip}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);font-weight:600}
+section{padding-block:44px;position:relative}
+p{margin:0}
+
+/* ghost headings */
+.gh{position:relative;padding-top:30px;margin-bottom:18px;overflow:hidden}
+.gh .ghost{position:absolute;top:-6px;left:0;font-family:var(--script);font-size:clamp(52px,16vw,78px);line-height:1;color:var(--ink);opacity:.09;white-space:nowrap;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.gh.c{text-align:center}.gh.c .ghost{left:50%;transform:translateX(-50%);animation-name:driftc}
+.gh h2{font-size:38px;font-style:italic;position:relative;line-height:1.05}
+@keyframes drift{to{transform:translateX(10px)}}
+@keyframes driftc{from{transform:translateX(-52%)}to{transform:translateX(-48%)}}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:16px;position:relative;z-index:3}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo svg{width:28px;height:28px}
+.logo b{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:.12em}
+.pill{border:1px solid var(--moss);color:var(--moss);background:transparent;border-radius:99px;padding:8px 16px;font:600 13px var(--body);text-decoration:none;cursor:pointer}
+
+/* leaves */
+.fronds{position:absolute;pointer-events:none;z-index:0;opacity:.85}
+.fronds svg{width:100%;height:100%;overflow:visible}
+.sway{transform-origin:10% 90%;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-2deg)}to{transform:rotate(3deg)}}
+
+/* blobs */
+.blob{position:relative;overflow:hidden;border-radius:58% 42% 55% 45% / 46% 56% 44% 54%;animation:morph 16s ease-in-out infinite alternate;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.blob img,.arch img,.round img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes morph{
+ 0%{border-radius:58% 42% 55% 45% / 46% 56% 44% 54%}
+ 50%{border-radius:42% 58% 40% 60% / 58% 42% 58% 42%}
+ 100%{border-radius:52% 48% 62% 38% / 40% 60% 46% 54%}}
+
+/* hero */
+.hero{padding-top:8px;display:grid;gap:22px;position:relative;z-index:1}
+.hero-pic{position:relative;margin-inline:auto;width:min(100%,420px)}
+.hero-pic .blob{aspect-ratio:4/5;max-width:100%}
+.hero-pic .float{position:absolute;width:38%;aspect-ratio:1;max-width:100%;left:0;bottom:-8%;border-radius:50%;overflow:hidden;border:5px solid var(--bg);box-shadow:0 0 0 1px var(--line),0 20px 40px -15px rgba(0,0,0,.8);animation:bob 6s ease-in-out infinite alternate}
+.hero-pic .float img{width:100%;height:100%;object-fit:cover}
+.hero-pic .tag{position:absolute;right:2%;top:8%;background:rgba(20,26,19,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12px;animation:bob 7s ease-in-out infinite alternate-reverse}
+.tag b{display:block;font-family:var(--display);font-size:20px;font-weight:500;color:var(--glow)}
+@keyframes bob{to{transform:translateY(-10px)}}
+.hero-txt{position:relative;overflow:hidden;padding-top:10px}
+.hero-txt .ghost{font-family:var(--script);font-size:clamp(64px,22vw,96px);line-height:.8;opacity:.1;position:absolute;top:-14px;right:0;pointer-events:none}
+.hero h1{font-size:44px;line-height:1.02;position:relative}
+.hero h1 em{color:var(--moss)}
+.hero-txt p{color:var(--muted);margin-top:12px;max-width:38ch}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{border:0;border-radius:99px;background:var(--moss);color:var(--moss-ink);font:700 15px var(--body);padding:14px 22px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s, box-shadow .2s}
+.btn:hover{box-shadow:0 0 0 6px rgba(167,183,132,.15)}
+.btn.line{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:4px;font-family:var(--display);font-size:19px;font-weight:500;padding:10px 22px}
+.btn[disabled]{opacity:.35;cursor:default;box-shadow:none}
+:is(.btn,.pill,.cat,.add,.slot,.x,.ghostbtn):focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+
+/* about */
+.about{display:grid;gap:22px}
+.about-pic{width:84%;position:relative}
+.about-pic .blob{aspect-ratio:1/1.05;max-width:100%;animation-duration:19s}
+.about p{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.fact{border-top:1px solid var(--line);padding-top:10px}
+.fact b{display:block;font-family:var(--display);font-size:26px;font-weight:500;line-height:1}
+.fact span{font-size:12px;color:var(--muted)}
+
+/* services */
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:linear-gradient(var(--bg) 80%,transparent);padding-block:10px 14px;margin-inline:-4px;padding-inline:4px}
+.cat{background:none;border:0;padding:0;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;font:500 11.5px/1.2 var(--body);text-align:center}
+.round{width:100%;max-width:72px;aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid var(--line);transition:box-shadow .3s, transform .3s;filter:saturate(.8)}
+.cat[aria-pressed="true"] .round{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--moss),0 0 26px 4px rgba(242,217,166,.35);transform:scale(1.05);filter:none}
+.cat[aria-pressed="true"]{color:var(--moss)}
+.panel{background:rgba(35,44,33,.7);border:1px solid var(--line);border-radius:22px;padding:6px 6px 6px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.panel-head{padding:14px 14px 8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.panel-head h3{font-size:26px;font-style:italic}
+.panel-head span{font-size:12px;color:var(--muted)}
+.svc{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:13px 10px 13px 14px;border-top:1px solid var(--line);border-radius:14px;transition:background .25s}
+.svc:first-of-type{border-top-color:transparent}
+.svc .t{min-width:0}
+.svc .n{font-weight:600}
+.svc .d{font-size:12.5px;color:var(--muted)}
+.price{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.add{width:38px;height:38px;border-radius:50%;border:1px solid var(--moss);background:transparent;color:var(--moss);font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.svc.on{background:rgba(167,183,132,.12)}
+.svc.on .add{background:var(--moss);color:var(--moss-ink);transform:rotate(360deg)}
+.panel.swap{animation:fadein .35s ease}
+@keyframes fadein{from{opacity:.3;transform:translateY(6px)}}
+
+/* quote */
+.quote{font-family:var(--display);font-size:38px;line-height:1.08;text-wrap:balance}
+.quote em{color:var(--moss);font-style:italic}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.arch{border-radius:999px 999px 18px 18px;overflow:hidden;aspect-ratio:3/4.4;max-width:100%;border:1px solid var(--line);position:relative}
+.gal .g2{margin-top:48px}
+.gal .wide{grid-column:1/-1;aspect-ratio:16/10;border-radius:42% 58% 50% 50% / 60% 55% 45% 40%;animation:morph 18s ease-in-out infinite alternate}
+.cap{position:absolute;left:10px;bottom:10px;background:rgba(20,26,19,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:99px;padding:5px 12px;font-size:12px}
+.arch img,.wide img{transition:transform 1.2s ease}
+.arch:hover img,.wide:hover img{transform:scale(1.05)}
+
+/* masters, reviews, contacts */
+.masters{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.m{text-align:center}
+.m .av{aspect-ratio:1;max-width:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%, #3A4A34, var(--card));border:1px solid var(--line);display:grid;place-items:center;font-family:var(--script);font-size:44px;color:var(--moss);margin-bottom:10px}
+.m b{display:block;font-family:var(--display);font-size:21px;font-weight:500}
+.m span{font-size:12.5px;color:var(--muted)}
+.revs{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none;margin-inline:-18px;padding-inline:18px}
+.revs::-webkit-scrollbar{display:none}
+.rev{flex:0 0 82%;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.rev p{font-family:var(--display);font-size:19px;font-style:italic;line-height:1.3}
+.rev .who{font-size:12.5px;color:var(--muted)}
+.stars{color:var(--glow);letter-spacing:3px;font-size:12px}
+.info{border-top:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row span{color:var(--muted)}
+.row b{text-align:right;font-weight:600}
+footer{text-align:center;color:var(--muted);font-size:12px;padding-top:26px}
+footer .logo{justify-content:center;margin-bottom:8px}
+
+/* reveal (visible at rest; only below-the-fold elements get a short lift) */
+.rv{transition:opacity .8s ease, transform .8s ease}
+.rv.pre{opacity:.001;transform:translateY(26px)}
+
+/* bar + sheet */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(20,26,19,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar-in{max-width:620px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.sum{flex:1;min-width:0}
+.sum .c{font-size:12px;color:var(--muted)}
+.sum .tot{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.tot.bump{animation:bump .35s ease}
+@keyframes bump{50%{transform:scale(1.08);color:var(--glow)}}
+.scrim{position:fixed;inset:0;background:rgba(5,8,5,.6);z-index:30}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:31;background:var(--bg2);border-top:1px solid var(--line);border-radius:26px 26px 0 0;max-height:90%;overflow-y:auto;
+  padding:22px max(18px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));animation:up .3s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.sheet-in{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.sheet h2{font-size:32px;font-style:italic}
+.ghostbtn{background:none;border:0;color:var(--muted);font:600 13px var(--body);cursor:pointer;text-decoration:underline}
+.picked{border:1px solid var(--line);border-radius:16px}
+.pk{display:flex;justify-content:space-between;gap:10px;padding:11px 12px;border-top:1px solid var(--line);font-size:14px}
+.pk:first-child{border-top:0}
+.x{background:none;border:0;color:var(--muted);cursor:pointer;font-size:17px;padding:0 0 0 8px}
+.pk-tot{display:flex;justify-content:space-between;font-weight:700;font-size:17px}
+label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;color:var(--muted)}
+input,select{width:100%;font:500 16px var(--body);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:9px 14px;font:600 13px var(--body);cursor:pointer}
+.slot[aria-pressed="true"]{background:var(--moss);color:var(--moss-ink);border-color:var(--moss)}
+.wa{width:100%;background:#25A35A;color:#fff}
+.hint{font-size:12px;color:var(--muted)}
+
+/* intro on load */
+@keyframes inUp{from{opacity:0;transform:translateY(28px)}}
+@keyframes inZoom{from{opacity:0;transform:scale(.92)}}
+@keyframes inFade{from{opacity:0}}
+@keyframes inLeaf{from{opacity:0;transform:translate(40px,-30px) rotate(12deg)}}
+.top{animation:inFade .8s ease both}
+.hero-pic .blob{animation:inZoom 1.1s cubic-bezier(.2,.7,.2,1) .15s both, morph 16s ease-in-out 1.3s infinite alternate}
+.hero-pic .float{animation:inUp .9s ease .55s both, bob 6s ease-in-out 1.5s infinite alternate}
+.hero-pic .tag{animation:inUp .9s ease .75s both, bob 7s ease-in-out 1.7s infinite alternate-reverse}
+.hero-txt .eyebrow{animation:inUp .8s ease .45s both}
+.hero h1{animation:inUp .9s ease .6s both}
+.hero-txt p{animation:inUp .9s ease .75s both}
+.cta-row{animation:inUp .9s ease .9s both}
+.hero-txt .ghost{animation:inFade 1.6s ease .3s both}
+.leaves .fronds:first-child{animation:inLeaf 1.4s ease .2s both}
+.bar{animation:inUp .7s ease 1.1s both}
+
+/* back to top */
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:19;width:46px;height:46px;border-radius:50%;border:1px solid var(--moss);background:rgba(20,26,19,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--moss);display:grid;place-items:center;cursor:pointer;opacity:0;transform:translateY(14px) scale(.9);pointer-events:none;transition:opacity .35s, transform .35s, background .2s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--moss);color:var(--moss-ink)}
+.totop:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.totop svg{width:20px;height:20px}
+
+
+/* ===== site mode: sections like Dastarkhan + day/night ===== */
+.top{gap:10px}
+.top .hr{display:flex;gap:8px;align-items:center}
+.mode{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:.3s}
+.mode svg{width:19px;height:19px}
+.tabs{position:sticky;top:0;z-index:12;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:10px 18px;background:linear-gradient(var(--bg) 75%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:0 0 auto;text-decoration:none;font:700 13px var(--body);color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:8px 15px;transition:.25s;white-space:nowrap}
+.tabs a.on{background:var(--moss);color:var(--moss-ink);border-color:var(--moss)}
+.cats{top:56px}
+.view{display:none}
+.view.on{display:block;animation:viewIn .55s cubic-bezier(.2,.7,.2,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px)}}
+@media (min-width:700px){.tabs{justify-content:center}}
+body,.panel,.bar,.sheet,.tag,.cap,.totop,.rev,input,select,.slot{transition:background-color .5s,color .5s,border-color .5s}
+body[data-mode="day"]{--bg:#F4F0E6;--bg2:#ECE7DA;--card:#FFFDF8;--ink:#1F2A1C;--muted:#5E6857;--line:#D8D2C1;--moss:#5E7A43;--moss-ink:#FFFFFF;--leaf:#9DB384;--glow:#9A7432;color-scheme:light;
+  background-image:radial-gradient(90% 50% at 100% 0%,#E6EBD8 0%,transparent 60%),radial-gradient(80% 40% at 0% 45%,#EFE9D6 0%,transparent 60%),radial-gradient(90% 40% at 100% 85%,#E3E9D2 0%,transparent 60%)}
+body[data-mode="day"] .panel{background:rgba(255,253,248,.8)}
+body[data-mode="day"] .bar{background:rgba(244,240,230,.92)}
+body[data-mode="day"] .tag,body[data-mode="day"] .cap,body[data-mode="day"] .totop{background:rgba(255,253,248,.85)}
+body[data-mode="day"] .scrim{background:rgba(60,60,40,.35)}
+body[data-mode="day"] .m .av{background:radial-gradient(circle at 35% 30%,#fff,#E8EDDC)}
+body[data-mode="day"] .fronds{opacity:.45}
+body[data-mode="day"] .blob,body[data-mode="day"] .arch{box-shadow:0 30px 60px -34px rgba(60,70,40,.45)}
+
+/* masters: clickable + profile */
+.masters .m{background:none;border:0;padding:0;color:var(--ink);cursor:pointer;font:inherit;transition:transform .3s}
+.masters .m:hover{transform:translateY(-4px)}
+.masters .m .av{transition:box-shadow .3s}
+.masters .m[aria-pressed="true"] .av{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--moss),0 0 30px 6px rgba(242,217,166,.3)}
+.masters .m[aria-pressed="true"] b{color:var(--moss)}
+.hint-c{font-size:12.5px;color:var(--muted);text-align:center;margin-top:14px}
+.prof{margin-top:26px;background:rgba(35,44,33,.72);border:1px solid var(--line);border-radius:28px;overflow:hidden;text-align:center;animation:fadein .45s ease}
+.prof .cover{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:180px;gap:4px;height:180px;overflow:hidden}
+.prof .cover img{width:100%;height:100%;object-fit:cover}
+.prof .in{padding:22px 18px 24px;display:flex;flex-direction:column;gap:14px}
+.prof h3{font-family:var(--display);font-style:italic;font-size:32px;font-weight:600}
+.prof .role{color:var(--moss);font-weight:700;font-size:13px;margin-top:-8px}
+.prof .bio{color:var(--muted);font-size:14px}
+.prof .pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.prof .pills span{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:12.5px}
+.prof .lst{text-align:left;border-top:1px solid var(--line)}
+.prof .lst div{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.prof label{text-align:left}
+body[data-mode="day"] .prof,body[data-mode="day"] .gc-form{background:rgba(255,253,248,.85)}
+
+/* gift certificate */
+.gc{display:grid;gap:22px;margin-top:10px}
+.gcard{position:relative;aspect-ratio:1.6;border-radius:22px;padding:20px 22px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;text-align:left;box-shadow:0 30px 60px -28px rgba(0,0,0,.8);transition:background .5s,color .5s;max-width:460px;width:100%;margin:0 auto}
+.gcard::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 45%,transparent 60%);transform:translateX(-120%);animation:shine 5s ease-in-out infinite}
+@keyframes shine{40%,100%{transform:translateX(120%)}}
+.gcard .lg{display:flex;align-items:center;gap:8px;font-family:var(--display);letter-spacing:.14em;font-size:20px;font-weight:600}
+.gcard .lg svg{width:24px;height:24px}
+.gcard .val{font-family:var(--display);font-size:clamp(34px,10vw,46px);font-weight:700;line-height:1}
+.gcard .val small{display:block;font-family:var(--body);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;opacity:.75;margin-bottom:4px}
+.gcard .to{font-size:13px;line-height:1.4}
+.gcard .to b{font-weight:800}
+.gcard .msg{font-family:var(--script);font-size:18px;opacity:.9;min-height:1em}
+.gcard .code{position:absolute;right:20px;top:22px;font-size:10.5px;letter-spacing:.14em;opacity:.7}
+.gcard.moss{background:radial-gradient(120% 90% at 100% 0%,#3E5A34,#1C241A);color:#EDEBDF}
+.gcard.powder{background:radial-gradient(120% 90% at 100% 0%,#F6E3DA,#E8C8BC);color:#4A2E2A}
+.gcard.gold{background:radial-gradient(120% 90% at 100% 0%,#F2D9A6,#B8924E);color:#2B2212}
+.gcard.powder .lg svg use,.gcard.gold .lg svg use{filter:brightness(.4)}
+.gc-form{background:rgba(35,44,33,.72);border:1px solid var(--line);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:16px;text-align:left}
+.gc-form h3{font-family:var(--display);font-style:italic;font-size:22px;font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:9px 14px;font:700 13px var(--body);cursor:pointer;transition:.2s}
+.opt[aria-pressed="true"]{background:var(--moss);color:var(--moss-ink);border-color:var(--moss)}
+.sw{display:flex;gap:10px}
+.sw button{width:54px;height:36px;border-radius:10px;border:2px solid transparent;cursor:pointer}
+.sw button[aria-pressed="true"]{border-color:var(--moss);box-shadow:0 0 0 3px var(--bg)}
+.sw .moss{background:#2F4A2A}.sw .powder{background:#EBCDC1}.sw .gold{background:#D9B770}
+@media (min-width:760px){.prof .cover{height:240px;grid-template-rows:240px}}
+
+@media (min-width:700px){.hero h1{font-size:56px}.gh h2{font-size:46px}.quote{font-size:48px}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv.pre{opacity:1;transform:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="lotus" viewBox="0 0 32 32"><g fill="none" stroke="#A7B784" stroke-width="1.4" stroke-linejoin="round"><path d="M16 6c3 4 3 10 0 16-3-6-3-12 0-16z"/><path d="M16 22c-2-5-6-8-11-8 1 5 5 8 11 8z"/><path d="M16 22c2-5 6-8 11-8-1 5-5 8-11 8z"/><path d="M6 24c3 1.5 6.5 2 10 2s7-.5 10-2"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="leaves" aria-hidden="true">
+<div class="fronds" style="top:-30px;right:-90px;width:260px;height:320px"><svg class="sway" viewBox="0 0 260 320" data-frond="1"></svg></div>
+<div class="fronds" style="top:1150px;left:-110px;width:270px;height:330px;transform:scaleX(-1)"><svg class="sway" viewBox="0 0 260 320" data-frond="2" style="animation-delay:-3s"></svg></div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top"><svg><use href="#lotus"/></svg><b>AYLA</b></a>
+    <div class="hr"><button class="mode" id="mode" aria-label="День / вечер"></button><a class="pill" href="#services">Записаться</a></div>
+  </header>
+  <nav class="tabs" id="tabs" aria-label="Разделы"><a href="#home">Главная</a><a href="#services">Услуги</a><a href="#studio">Студия</a><a href="#masters">Мастера</a><a href="#gift">Сертификат</a><a href="#contacts">Контакты</a></nav>
+
+  <div class="view" data-v="home">
+  <div class="hero" id="top">
+    <div class="hero-pic">
+      <div class="blob"><img src="img/lounge.jpg" alt="Зона ожидания с арками и подсвеченным зеркалом"></div>
+      <div class="float"><img src="img/spa.jpg" alt="Кабинет косметолога"></div>
+      <div class="tag"><b>4.9 ★</b>отзывы в 2ГИС</div>
+    </div>
+    <div class="hero-txt">
+      <span class="ghost" aria-hidden="true">Ayla</span>
+      <div class="eyebrow">Студия красоты · Алматы</div>
+      <h1 style="margin-top:8px">Красота, <em>в которой</em> можно отдохнуть</h1>
+      <p>Волосы, ногти, брови и уход за лицом в тихой студии с тёплым светом. Выберите услуги, и мы пришлём подтверждение в WhatsApp.</p>
+      <div class="cta-row"><a class="btn" href="#services">Выбрать услуги</a><a class="btn line" href="#about">О студии</a></div>
+    </div>
+  </div>
+
+  <section id="about" class="rv">
+    <div class="about">
+      <div class="about-pic"><div class="blob"><img src="img/chair.jpg" alt="Кресло, золотое зеркало и живые растения"></div></div>
+      <div>
+        <div class="gh"><span class="ghost" aria-hidden="true">О нас</span><h2>О студии</h2></div>
+        <p>Мы сделали место, где не нужно торопиться. Мягкие кресла, чай, тишина и мастера, которые сначала слушают, а потом работают. Используем профессиональную косметику и одноразовые расходники, инструменты проходят стерилизацию.</p>
+        <div class="facts">
+          <div class="fact"><b>8</b><span>лет работы</span></div>
+          <div class="fact"><b>6</b><span>мастеров</span></div>
+          <div class="fact"><b>12 000+</b><span>визитов</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="view" data-v="services">
+  <section id="services">
+    <div class="gh c rv"><span class="ghost" aria-hidden="true">Услуги</span><h2>Услуги и цены</h2></div>
+    <p class="hint" style="text-align:center;margin:-6px 0 6px">Выберите категорию и нажмите «+». Сумма считается внизу.</p>
+    <nav class="cats" id="cats" aria-label="Категории услуг"></nav>
+    <div class="panel" id="panel"></div>
+  </section>
+
+  <section class="rv">
+    <p class="quote">Красота начинается <em>с покоя.</em><br>Мы просто даём ему время.</p>
+  </section>
+  </div>
+
+  <div class="view" data-v="studio">
+  <section id="studio">
+    <div class="gh rv"><span class="ghost" aria-hidden="true">Студия</span><h2>Наша студия</h2></div>
+    <div class="gal">
+      <div class="arch rv"><img src="img/nails.jpg" alt="Маникюрный зал с арочными полками"><span class="cap">Маникюрный зал</span></div>
+      <div class="arch g2 rv"><img src="img/zen.jpg" alt="Коридор с бамбуком и камнями"><span class="cap">Зона тишины</span></div>
+      <div class="wide rv"><img src="img/spa.jpg" alt="Кабинет ухода за лицом"><span class="cap">Кабинет косметолога</span></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="view" data-v="masters">
+  <section>
+    <div class="gh c rv"><span class="ghost" aria-hidden="true">Мастера</span><h2>Наши мастера</h2></div>
+    <div class="masters rv" id="mgrid"></div>
+    <p class="hint-c">Нажмите на мастера, чтобы увидеть работы и записаться к нему.</p>
+    <div id="prof"></div>
+  </section>
+
+  <section>
+    <div class="gh rv"><span class="ghost" aria-hidden="true">Отзывы</span><h2>Что говорят гости</h2></div>
+    <div class="revs rv">
+      <div class="rev"><div class="stars">★★★★★</div><p>Цвет получился ровно как на референсе, и мне ещё объяснили, как за ним ухаживать.</p><div class="who">Асель · пример отзыва</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>Маникюр держится три недели. Начали минута в минуту, очень уютно.</p><div class="who">Камила · пример отзыва</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>Пришла на чистку лица и почти уснула. Кожа после неё правда другая.</p><div class="who">Жулдыз · пример отзыва</div></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="view" data-v="gift">
+  <section>
+    <div class="gh c rv"><span class="ghost" aria-hidden="true">Подарок</span><h2>Подарочный сертификат</h2></div>
+    <p class="hint" style="text-align:center;margin:-4px auto 18px;max-width:46ch">Подарите заботу о себе. Соберите сертификат, посмотрите, как он выглядит, и отправьте заявку в WhatsApp.</p>
+    <div class="gc">
+      <div class="gpv rv"><div class="gcard moss" id="gcard">
+        <span class="code" id="gCode">AYLA-0000</span>
+        <div class="lg"><svg><use href="#lotus"/></svg>AYLA</div>
+        <div class="val"><small id="gKind">Сертификат на сумму</small><span id="gVal">10 000 ₸</span></div>
+        <div><div class="msg" id="gMsg"></div><div class="to" id="gTo"></div></div>
+      </div></div>
+      <div class="gc-form rv">
+        <div><h3>1. Что подарить</h3><div class="opts" id="gType"></div></div>
+        <div id="gAmtBox"><label>Сумма</label><div class="opts" id="gAmt"></div></div>
+        <div id="gSvcBox" hidden><label for="gSvc">Услуга</label><select id="gSvc"></select></div>
+        <div><h3>2. Дизайн</h3><div class="sw" id="gDes"><button class="moss" data-d="moss" aria-label="Мох"></button><button class="powder" data-d="powder" aria-label="Пудра"></button><button class="gold" data-d="gold" aria-label="Золото"></button></div></div>
+        <div><h3>3. Кому и от кого</h3>
+          <label for="gToN">Кому</label><input id="gToN" placeholder="Например, Мама">
+          <label for="gFrN" style="margin-top:10px">От кого</label><input id="gFrN" placeholder="Ваше имя">
+          <label for="gWish" style="margin-top:10px">Пожелание</label><input id="gWish" maxlength="60" placeholder="С днём рождения!">
+        </div>
+        <div><h3>4. Как получить</h3><div class="opts" id="gDel"></div></div>
+        <a class="btn wa" id="gWa" target="_blank" rel="noopener" href="#">Заказать сертификат в WhatsApp</a>
+        <p class="hint">Оплата и активация — после подтверждения администратора. Сертификат действует 3 месяца.</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="view" data-v="contacts">
+  <section id="contacts" class="rv">
+    <div class="gh"><span class="ghost" aria-hidden="true">Контакты</span><h2>Как нас найти</h2></div>
+    <div class="info">
+      <div class="row"><span>Адрес</span><b>ул. Абая, 52, Алматы</b></div>
+      <div class="row"><span>Часы</span><b>Ежедневно 10:00–21:00</b></div>
+      <div class="row"><span>WhatsApp</span><b>+7 700 000 00 00</b></div>
+      <div class="row"><span>Instagram</span><b>@ayla.studio</b></div>
+    </div>
+  </section>
+  </div>
+  <footer style="padding-top:40px"><div class="logo"><svg><use href="#lotus"/></svg><b>AYLA</b></div>© Ayla beauty studio · пример сайта, данные демо</footer>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="sum"><div class="c" id="cnt">Услуги не выбраны</div><div class="tot" id="tot">0 ₸</div></div>
+    <button class="btn" id="openSheet" disabled>Записаться</button>
+  </div>
+</div>
+
+<button class="totop" id="totop" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="shT">
+  <div class="sheet-in">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 id="shT">Ваша запись</h2><button class="ghostbtn" id="closeSheet">Закрыть</button>
+    </div>
+    <div class="picked" id="picked"></div>
+    <div class="pk-tot"><span>Итого</span><span id="tot2">0 ₸</span></div>
+    <div><label for="nm">Ваше имя</label><input id="nm" placeholder="Например, Асель" autocomplete="given-name"></div>
+    <div><label for="day">День</label><select id="day"></select></div>
+    <div><label>Удобное время</label><div class="slots" id="slots"></div></div>
+    <div><label for="note">Комментарий</label><input id="note" placeholder="Любимый мастер, пожелания"></div>
+    <a class="btn wa" id="waBtn" target="_blank" rel="noopener" href="#">Отправить в WhatsApp</a>
+    <p class="hint">Откроется WhatsApp с готовым сообщением. Администратор подтвердит время в ответ.</p>
+  </div>
+</div>
+
+<script>
+const WA = "77000000000"; // номер салона без +
+const DATA = [
+ {id:"hair",name:"Волосы",img:"img/chair.jpg",items:[
+  ["Женская стрижка","60 мин",8000],["Мужская стрижка","40 мин",5000],["Детская стрижка","30 мин",4000],
+  ["Укладка","45 мин",6000],["Окрашивание в один тон","2 ч",18000],["Аиртач / балаяж","4–5 ч",45000],["Кератин или ботокс волос","2,5 ч",30000]]},
+ {id:"nails",name:"Ногти",img:"img/nails.jpg",items:[
+  ["Маникюр без покрытия","45 мин",4000],["Маникюр + гель-лак","1,5 ч",7000],["Наращивание ногтей","2,5 ч",12000],
+  ["Дизайн, 1 ноготь","10 мин",500],["Педикюр + гель-лак","1,5 ч",9000]]},
+ {id:"brows",name:"Брови",img:"img/lounge.jpg",items:[
+  ["Коррекция бровей","20 мин",2500],["Окрашивание бровей","30 мин",3000],["Ламинирование бровей","1 ч",6000],
+  ["Ламинирование ресниц","1 ч",7000],["Наращивание ресниц, классика","2 ч",10000]]},
+ {id:"face",name:"Лицо",img:"img/spa.jpg",items:[
+  ["Комбинированная чистка","1,5 ч",12000],["Пилинг","40 мин",9000],["Уход с массажем лица","1 ч",10000]]},
+ {id:"makeup",name:"Макияж",img:"img/zen.jpg",items:[
+  ["Дневной макияж","45 мин",8000],["Вечерний макияж","1 ч",12000],["Свадебный образ: макияж и причёска","3 ч",35000]]}
+];
+const fmt=n=>n.toLocaleString("ru-RU").replace(/[  ,]/g," ")+" ₸";
+const sel=new Map(); let cur="hair", slot=null;
+
+// palm fronds
+document.querySelectorAll("[data-frond]").forEach(svg=>{
+  const ns="http://www.w3.org/2000/svg";
+  const stem=document.createElementNS(ns,"path");
+  stem.setAttribute("d","M240 10 Q150 120 30 300");stem.setAttribute("stroke","#3E5A34");stem.setAttribute("stroke-width","3");stem.setAttribute("fill","none");svg.appendChild(stem);
+  for(let i=0;i<22;i++){const t=i/22;const x=(1-t)*(1-t)*240+2*(1-t)*t*150+t*t*30,y=(1-t)*(1-t)*10+2*(1-t)*t*120+t*t*300;
+    [1,-1].forEach(s=>{const l=document.createElementNS(ns,"path");const len=70+50*Math.sin(t*Math.PI);
+      l.setAttribute("d",`M0 0 Q${len*.5} ${-9} ${len} 0 Q${len*.5} 9 0 0Z`);
+      l.setAttribute("fill",i%2?"#2F4A2A":"#3E5A34");
+      l.setAttribute("transform",`translate(${x} ${y}) rotate(${(s>0?-35:145)+t*60})`);svg.appendChild(l)})}
+});
+
+// categories
+const catsEl=document.getElementById("cats"), panel=document.getElementById("panel");
+DATA.forEach(c=>{const b=document.createElement("button");b.className="cat";b.id="cat-"+c.id;
+  b.innerHTML=`<span class="round"><img src="${c.img}" alt=""></span>${c.name}`;
+  b.onclick=()=>{cur=c.id;drawPanel(true)};catsEl.appendChild(b)});
+function drawPanel(anim){
+  catsEl.querySelectorAll(".cat").forEach(b=>b.setAttribute("aria-pressed",b.id==="cat-"+cur?"true":"false"));
+  const c=DATA.find(x=>x.id===cur);
+  panel.innerHTML=`<div class="panel-head"><h3>${c.name}</h3><span>${c.items.length} услуг</span></div>`;
+  c.items.forEach(([n,d,p],i)=>{const key=c.id+i,on=sel.has(key),r=document.createElement("div");r.className="svc"+(on?" on":"");
+    r.innerHTML=`<div class="t"><div class="n">${n}</div><div class="d">${d}</div></div><div class="price">${fmt(p)}</div><button class="add" id="add-${key}" aria-label="${on?"Убрать":"Добавить"}: ${n}">${on?"✓":"+"}</button>`;
+    r.querySelector(".add").onclick=()=>{toggle(key,{n,p});drawPanel(false)};panel.appendChild(r)});
+  if(anim){panel.classList.remove("swap");void panel.offsetWidth;panel.classList.add("swap")}
+}
+function toggle(k,v){sel.has(k)?sel.delete(k):sel.set(k,v);render(true)}
+const total=()=>{let t=0;sel.forEach(v=>t+=v.p);return t};
+function plural(n){const m=n%10,h=n%100;return m===1&&h!==11?"услуга":(m>=2&&m<=4&&(h<12||h>14))?"услуги":"услуг"}
+function render(bump){
+  const n=sel.size,t=total(),tot=document.getElementById("tot");
+  document.getElementById("cnt").textContent=n?`Выбрано: ${n} ${plural(n)}`:"Услуги не выбраны";
+  tot.textContent=fmt(t);document.getElementById("tot2").textContent=fmt(t);
+  if(bump){tot.classList.remove("bump");void tot.offsetWidth;tot.classList.add("bump")}
+  document.getElementById("openSheet").disabled=!n;
+  const pk=document.getElementById("picked");pk.innerHTML="";
+  sel.forEach((v,k)=>{const d=document.createElement("div");d.className="pk";
+    d.innerHTML=`<span>${v.n}</span><span class="price">${fmt(v.p)}<button class="x" aria-label="Убрать: ${v.n}">×</button></span>`;
+    d.querySelector(".x").onclick=()=>{toggle(k,v);drawPanel(false);if(!sel.size)closeS()};pk.appendChild(d)});
+  updWa();
+}
+// days and time
+const dayEl=document.getElementById("day"),wd=["вс","пн","вт","ср","чт","пт","сб"],mo=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()+i);const o=document.createElement("option");
+  o.textContent=o.value=(i===0?"Сегодня, ":i===1?"Завтра, ":wd[d.getDay()]+", ")+d.getDate()+" "+mo[d.getMonth()];dayEl.appendChild(o)}
+const slotsEl=document.getElementById("slots");
+["10:00","11:30","13:00","14:30","16:00","17:30","19:00"].forEach(t=>{const b=document.createElement("button");b.className="slot";b.id="slot-"+t.replace(":","");b.textContent=t;b.setAttribute("aria-pressed","false");
+  b.onclick=()=>{slot=slot===t?null:t;slotsEl.querySelectorAll(".slot").forEach(x=>x.setAttribute("aria-pressed",x.textContent===slot?"true":"false"));updWa()};slotsEl.appendChild(b)});
+["nm","note","day"].forEach(id=>document.getElementById(id).addEventListener("input",updWa));
+function updWa(){
+  const nm=document.getElementById("nm").value.trim(),note=document.getElementById("note").value.trim();
+  let m="Здравствуйте! Хочу записаться в Ayla.\n\n";if(nm)m+="Имя: "+nm+"\n";
+  m+="Услуги:\n";sel.forEach(v=>m+="• "+v.n+" — "+fmt(v.p)+"\n");
+  m+="Итого: "+fmt(total())+"\n\nКогда: "+dayEl.value+(slot?", "+slot:", время уточню")+"\n";
+  if(note)m+="Комментарий: "+note+"\n";
+  document.getElementById("waBtn").href="https://wa.me/"+WA+"?text="+encodeURIComponent(m);
+}
+const sheet=document.getElementById("sheet"),scrim=document.getElementById("scrim");
+function openS(){sheet.hidden=false;scrim.hidden=false}
+function closeS(){sheet.hidden=true;scrim.hidden=true}
+document.getElementById("openSheet").onclick=openS;document.getElementById("closeSheet").onclick=closeS;scrim.onclick=closeS;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeS()});
+
+// views (like Dastarkhan) + gentle reveal + smooth scroll
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let io=null;
+function reveal(view){if(reduce||!("IntersectionObserver" in window))return;if(io)io.disconnect();
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px"});
+  view.querySelectorAll(".rv").forEach(el=>{if(el.getBoundingClientRect().top>innerHeight*.9){el.classList.add("pre");io.observe(el)}else el.classList.remove("pre")})}
+const VIEWS=["home","services","studio","masters","gift","contacts"];
+function route(){let v=(location.hash||"#home").slice(1);let anchor=null;
+  if(v==="about"||v==="top"){anchor=v;v="home"}
+  if(!VIEWS.includes(v))v="home";
+  document.querySelectorAll(".view").forEach(el=>el.classList.toggle("on",el.dataset.v===v));
+  document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
+  if(anchor==="about"){const t=document.getElementById("about");requestAnimationFrame(()=>window.scrollTo({top:t.getBoundingClientRect().top+scrollY-60,behavior:reduce?"auto":"smooth"}))}
+  else window.scrollTo({top:0,behavior:"instant"});
+  requestAnimationFrame(()=>reveal(document.querySelector(".view.on")));
+  document.querySelector(".bar").style.display=(v==="services")?"":"none"}
+addEventListener("hashchange",route);
+function smoothTo(y){window.scrollTo({top:y,behavior:reduce?"auto":"smooth"})}
+const totop=document.getElementById("totop");
+totop.onclick=()=>smoothTo(0);
+let ticking=false;
+addEventListener("scroll",()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{totop.classList.toggle("show",scrollY>600);ticking=false})},{passive:true});
+// day / night (auto: evening after 18:00)
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
+let mode=null;try{mode=localStorage.getItem("ayla_mode")}catch(e){}
+if(mode!=="day"&&mode!=="night"){const hr=new Date().getHours();mode=(hr>=7&&hr<18)?"day":"night"}
+function setMode(m){mode=m;document.body.dataset.mode=m;const b=document.getElementById("mode");b.innerHTML=m==="day"?MOON:SUN;b.setAttribute("aria-label",m==="day"?"Включить вечер":"Включить день");
+  document.querySelector('meta[name="theme-color"]')&&document.querySelector('meta[name="theme-color"]').setAttribute("content",m==="day"?"#F4F0E6":"#141A13")}
+document.getElementById("mode").onclick=()=>{setMode(mode==="day"?"night":"day");try{localStorage.setItem("ayla_mode",mode)}catch(e){}};
+setMode(mode);
+
+/* ===== masters profiles + booking to a master ===== */
+const MS=[
+ {id:"aigerim",n:"Айгерим",i:"А",r:"Стилист-колорист",y:8,c:["hair","makeup"],w:["chair","lounge"],bio:"Сложное окрашивание, аиртач и укладки. Подберёт оттенок под тон кожи и объяснит домашний уход."},
+ {id:"dana",n:"Дана",i:"Д",r:"Мастер маникюра",y:6,c:["nails"],w:["nails","zen"],bio:"Аккуратный маникюр, наращивание и нежный дизайн. Покрытие держится 3–4 недели."},
+ {id:"madina",n:"Мадина",i:"М",r:"Бровист, лешмейкер",y:5,c:["brows"],w:["lounge","spa"],bio:"Форма бровей под черты лица, ламинирование и наращивание ресниц."},
+ {id:"zhanel",n:"Жанель",i:"Ж",r:"Косметолог",y:7,c:["face","makeup"],w:["spa","zen"],bio:"Чистки, пилинги и уход с массажем. Подбирает процедуры под тип кожи."}
+];
+const mgrid=document.getElementById("mgrid"),prof=document.getElementById("prof");let curM=null,mSlot=null;
+MS.forEach(m=>{const b=document.createElement("button");b.className="m";b.type="button";b.setAttribute("aria-pressed","false");
+  b.innerHTML=`<div class="av">${m.i}</div><b>${m.n}</b><span>${m.r}</span>`;b.onclick=()=>openM(m.id,true);mgrid.appendChild(b)});
+function openM(id,scroll){const m=MS.find(x=>x.id===id);curM=m;mSlot=null;
+  mgrid.querySelectorAll(".m").forEach((b,i)=>b.setAttribute("aria-pressed",MS[i].id===id));
+  const svcs=DATA.filter(c=>m.c.includes(c.id)).flatMap(c=>c.items).slice(0,6);
+  const days=[...dayEl.options].slice(0,7).map(o=>`<option>${o.value}</option>`).join("");
+  prof.innerHTML=`<div class="prof"><div class="cover"><img src="img/${m.w[0]}.jpg" alt="Работа мастера"><img src="img/${m.w[1]}.jpg" alt="Работа мастера"></div><div class="in">
+   <h3>${m.n}</h3><div class="role">${m.r}</div><p class="bio">${m.bio}</p>
+   <div class="pills"><span>${m.y} лет опыта</span><span>★ 4.9</span><span>${DATA.filter(c=>m.c.includes(c.id)).map(c=>c.name).join(" · ")}</span></div>
+   <div class="lst">${svcs.map(([n,d,p])=>`<div><span>${n}</span><b>${fmt(p)}</b></div>`).join("")}</div>
+   <div><label for="mDay">День</label><select id="mDay">${days}</select></div>
+   <div><label>Свободное время</label><div class="slots" id="mSlots"></div></div>
+   <a class="btn wa" id="mWa" target="_blank" rel="noopener" href="#">Записаться к ${m.n === "Дана" ? "Дане" : m.n === "Мадина" ? "Мадине" : m.n === "Жанель" ? "Жанель" : "Айгерим"}</a>
+  </div></div>`;
+  const ms=document.getElementById("mSlots");
+  ["10:00","11:30","13:00","15:00","16:30","18:00"].forEach((t,i)=>{const b=document.createElement("button");b.className="slot";b.textContent=t;b.setAttribute("aria-pressed","false");
+    if((i+m.y)%4===0){b.disabled=true;b.style.opacity=".35";b.title="Занято"}
+    b.onclick=()=>{mSlot=mSlot===t?null:t;ms.querySelectorAll(".slot").forEach(x=>x.setAttribute("aria-pressed",x.textContent===mSlot));updM()};ms.appendChild(b)});
+  document.getElementById("mDay").addEventListener("input",updM);updM();
+  if(scroll)requestAnimationFrame(()=>window.scrollTo({top:prof.getBoundingClientRect().top+scrollY-70,behavior:reduce?"auto":"smooth"}))}
+function updM(){if(!curM)return;let t="Здравствуйте! Хочу записаться в Ayla к мастеру "+curM.n+" ("+curM.r.toLowerCase()+").\n";
+  t+="Когда: "+document.getElementById("mDay").value+(mSlot?", "+mSlot:", время уточню")+"\n";
+  if(sel.size){t+="Услуги:\n";sel.forEach(v=>t+="• "+v.n+" — "+fmt(v.p)+"\n")}
+  document.getElementById("mWa").href="https://wa.me/"+WA+"?text="+encodeURIComponent(t)}
+
+/* ===== gift certificate ===== */
+const G={type:"sum",amt:10000,svc:null,des:"moss",del:"e"};
+const gType=document.getElementById("gType"),gAmt=document.getElementById("gAmt"),gDel=document.getElementById("gDel"),gSvc=document.getElementById("gSvc");
+function opts(el,list,key,cb){el.innerHTML="";list.forEach(([v,n])=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=n;b.setAttribute("aria-pressed",G[key]===v);
+  b.onclick=()=>{G[key]=v;el.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed",x===b));cb&&cb();updG()};el.appendChild(b)})}
+opts(gType,[["sum","Сумма"],["svc","Услуга"]],"type",()=>{document.getElementById("gAmtBox").hidden=G.type!=="sum";document.getElementById("gSvcBox").hidden=G.type!=="svc"});
+opts(gAmt,[[5000,"5 000 ₸"],[10000,"10 000 ₸"],[20000,"20 000 ₸"],[30000,"30 000 ₸"],[50000,"50 000 ₸"]],"amt");
+opts(gDel,[["e","Электронный, в WhatsApp"],["box","В конверте, забрать в студии"]],"del");
+DATA.forEach(c=>c.items.forEach(([n,d,p])=>{const o=document.createElement("option");o.value=n+"|"+p;o.textContent=n+" — "+fmt(p);gSvc.appendChild(o)}));
+gSvc.selectedIndex=DATA[0].items.length+1;
+document.querySelectorAll("#gDes button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.d===G.des);b.onclick=()=>{G.des=b.dataset.d;document.querySelectorAll("#gDes button").forEach(x=>x.setAttribute("aria-pressed",x===b));updG()}});
+["gToN","gFrN","gWish","gSvc"].forEach(id=>document.getElementById(id).addEventListener("input",updG));
+const gCode="AYLA-"+String(Math.floor(1000+Math.random()*9000));document.getElementById("gCode").textContent=gCode;
+function updG(){const to=document.getElementById("gToN").value.trim(),fr=document.getElementById("gFrN").value.trim(),wi=document.getElementById("gWish").value.trim();
+  const [sn,sp]=gSvc.value.split("|");const card=document.getElementById("gcard");card.className="gcard "+G.des;
+  document.getElementById("gKind").textContent=G.type==="sum"?"Сертификат на сумму":"Сертификат на услугу";
+  document.getElementById("gVal").textContent=G.type==="sum"?fmt(G.amt):sn;
+  document.getElementById("gVal").style.fontSize=G.type==="sum"?"":"clamp(22px,6vw,30px)";
+  document.getElementById("gMsg").textContent=wi;
+  document.getElementById("gTo").innerHTML=(to?`Для: <b>${to.replace(/</g,"&lt;")}</b>`:"Для: <b>…</b>")+(fr?` · От: <b>${fr.replace(/</g,"&lt;")}</b>`:"");
+  const names={moss:"Мох",powder:"Пудра",gold:"Золото"};
+  let t="Здравствуйте! Хочу заказать подарочный сертификат Ayla.\n";
+  t+=G.type==="sum"?"На сумму: "+fmt(G.amt)+"\n":"На услугу: "+sn+" ("+fmt(+sp)+")\n";
+  t+="Дизайн: "+names[G.des]+"\n";if(to)t+="Кому: "+to+"\n";if(fr)t+="От кого: "+fr+"\n";if(wi)t+="Пожелание: "+wi+"\n";
+  t+="Получение: "+(G.del==="e"?"электронный, в WhatsApp":"в конверте, заберу в студии")+"\n";
+  document.getElementById("gWa").href="https://wa.me/"+WA+"?text="+encodeURIComponent(t)}
+updG();
+
+drawPanel(false);render(false);route();
+</script>
+
+</body></html>

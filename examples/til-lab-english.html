@@ -1,0 +1,277 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Til Lab English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: phone-first course landing; dark blue gradient hero with floating speech bubbles, yellow highlighter on key words, sections reveal on scroll */
+:root{
+  --bg:#f3f5fc; --surface:#ffffff; --ink:#111b3a; --muted:#56607a;
+  --accent:#ffc83d; --accent-2:#ff8a5c; --accent-ink:#111b3a;
+  --deep:#1f3fbf; --deep-2:#0d1a4d; --line:#dde2f0; --glow:rgba(31,63,191,.14);
+  --display:"Montserrat",system-ui,sans-serif; --body:"Nunito",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b1024; --surface:#151d3b; --ink:#eef1fa; --muted:#a6afc8;
+  --deep:#8fa9ff; --line:#27315a; --glow:rgba(143,169,255,.16); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1024; --surface:#151d3b; --ink:#eef1fa; --muted:#a6afc8;
+  --deep:#8fa9ff; --line:#27315a; --glow:rgba(143,169,255,.16); color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip;max-width:100%}
+body{touch-action:pan-y pinch-zoom}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(900px 500px at 110% 30%, var(--glow), transparent 60%),
+    radial-gradient(700px 500px at -10% 70%, rgba(255,200,61,.14), transparent 60%),
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 1.5px) 0 0/22px 22px,
+    var(--bg);
+  color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;overflow-x:hidden}
+.wrap{max-width:780px;margin:0 auto;padding-inline:18px;padding-block:0 56px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.12;margin:0}
+h2{font-size:clamp(28px,6.4vw,40px);font-weight:900;letter-spacing:-.01em}
+h3{font-size:19px;font-weight:800}
+p{margin:0}
+.hl{background:linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%);padding-inline:2px}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:radial-gradient(600px 380px at 85% 10%, rgba(255,138,92,.45), transparent 60%),
+             radial-gradient(700px 500px at 0% 100%, rgba(255,200,61,.30), transparent 60%),
+             linear-gradient(150deg,#2448d8 0%,#16297a 55%,#0d1a4d 100%);
+  border-radius:0 0 34px 34px;padding-inline:18px;padding-block:0 56px}
+.hero-in{max-width:780px;margin:0 auto;display:grid;gap:22px;position:relative;z-index:1}
+.demo{display:block;text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;padding-block:10px}
+nav{display:flex;justify-content:space-between;align-items:center;padding-block:10px 18px}
+.logo{font-family:var(--display);font-weight:900;font-size:22px}
+.logo span{background:var(--accent);color:var(--accent-ink);padding:2px 9px;border-radius:12px 12px 12px 3px;margin-left:4px}
+.hero h1{font-size:clamp(36px,9.5vw,62px);font-weight:900;letter-spacing:-.02em}
+.hero h1 .hl{color:var(--accent-ink)}
+.lead{font-size:clamp(18px,4.4vw,21px);opacity:.9;max-width:52ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px}
+.facts span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);padding:8px 14px;border-radius:999px;font-size:15px}
+.facts b{font-family:var(--display);color:var(--accent)}
+.bubbles{position:absolute;inset:0;pointer-events:none}
+.bub{position:absolute;font-family:var(--display);font-weight:800;font-size:14px;padding:8px 14px;border-radius:16px 16px 16px 4px;box-shadow:0 10px 30px rgba(0,0,0,.25);white-space:nowrap}
+.b1{top:92px;right:6%;background:var(--accent);color:var(--accent-ink)}
+.b2{top:46%;right:-10px;background:#fff;color:#16297a;border-radius:16px 16px 4px 16px}
+.b3{bottom:22px;right:22%;background:var(--accent-2);color:#fff}
+@media (max-width:620px){.b1{top:76px;right:4%}.b2{display:none}.b3{bottom:12px;right:6%}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent),#ffb020);color:var(--accent-ink);font-family:var(--display);font-weight:800;font-size:17px;padding:16px 26px;border-radius:16px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 10px 24px rgba(255,176,32,.38)}
+.btn.small{padding:10px 16px;font-size:14px;box-shadow:none}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* SECTIONS */
+section{padding-block:56px 8px;display:grid;gap:24px}
+.eyebrow{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--deep)}
+.head{display:grid;gap:8px}
+
+.marquee-wrap{overflow:hidden;padding-block:14px}
+.marquee{overflow:hidden;background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-weight:800;font-size:18px;padding-block:14px;transform:rotate(-1.5deg) scale(1.04);margin:14px 0 0;box-shadow:0 8px 24px rgba(255,176,32,.3)}
+.track{display:flex;gap:36px;width:max-content;animation:slide 26s linear infinite}
+.track span::after{content:"✦";margin-left:36px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+.pains{display:grid;gap:12px;list-style:none;padding:0;margin:0}
+.pains li{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;font-size:17px;font-weight:600;box-shadow:0 6px 20px var(--glow)}
+.pains li::before{content:"?";flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent-2);color:#fff;font-family:var(--display);font-weight:900}
+
+.modules{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:m;position:relative}
+.modules li{display:grid;grid-template-columns:52px 1fr;gap:2px 16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.modules li::before{counter-increment:m;content:counter(m);grid-row:span 2;display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:linear-gradient(140deg,#2448d8,#0d1a4d);color:var(--accent);font-family:var(--display);font-weight:900;font-size:22px}
+.modules p{color:var(--muted);font-size:16px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:grid;gap:10px;align-content:start;box-shadow:0 8px 26px var(--glow)}
+.card p{color:var(--muted);font-size:16px}
+.ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(140deg,var(--accent),var(--accent-2))}
+.review p{color:var(--ink);font-size:17px;font-weight:600}
+.review .who{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.ava{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--deep);color:#fff;font-family:var(--display);font-weight:800}
+.stars{color:#f5a400;letter-spacing:2px}
+
+.price{font-family:var(--display);font-weight:900;font-size:36px;font-variant-numeric:tabular-nums}
+.price small{font-size:16px;font-weight:600;color:var(--muted)}
+.card ul{margin:0;padding:0;list-style:none;color:var(--muted);font-size:16px;display:grid;gap:6px}
+.card ul li::before{content:"✓";color:var(--deep);font-weight:900;margin-right:8px}
+.card.best{background:linear-gradient(160deg,#2448d8,#0d1a4d);color:#fff;border:0;box-shadow:0 18px 40px rgba(31,63,191,.4)}
+.card.best ul,.card.best .price small{color:rgba(255,255,255,.82)}
+.card.best ul li::before{color:var(--accent)}
+.tag{justify-self:start;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:4px 10px;border-radius:8px;font-weight:800}
+.note{color:var(--muted);font-size:15px}
+
+.faq{display:grid;gap:10px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+summary{cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);font-weight:900;font-size:22px;line-height:1;color:var(--deep);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin-top:10px}
+
+.cta{position:relative;overflow:hidden;color:#fff;border-radius:28px;padding:34px 24px;margin-top:56px;
+  background:radial-gradient(400px 260px at 100% 0%, rgba(255,138,92,.55), transparent 60%),linear-gradient(150deg,#2448d8,#0d1a4d);
+  box-shadow:0 20px 50px rgba(31,63,191,.35)}
+.cta h2{color:#fff}
+.cta p{opacity:.88;font-size:18px}
+.timer{display:flex;gap:10px;flex-wrap:wrap}
+.timer div{background:rgba(255,255,255,.14);border-radius:14px;padding:10px 14px;text-align:center;min-width:70px}
+.timer b{display:block;font-family:var(--display);font-weight:900;font-size:26px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.timer small{font-size:12px;opacity:.8}
+footer{font-size:14px;color:var(--muted);text-align:center;padding-top:28px}
+
+/* MOTION */
+@media (prefers-reduced-motion:no-preference){
+  .hero-in>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero-in>*:nth-child(2){animation-delay:.08s}.hero-in>*:nth-child(3){animation-delay:.16s}
+  .hero-in>*:nth-child(4){animation-delay:.24s}.hero-in>*:nth-child(5){animation-delay:.32s}
+  .bub{animation:float 5s ease-in-out infinite}.b2{animation-delay:-1.6s}.b3{animation-delay:-3.2s}
+  .btn{transition:transform .2s, box-shadow .2s}.btn:hover{transform:translateY(-3px)}
+  .card,.pains li,.modules li{transition:transform .25s, box-shadow .25s}
+  .card:hover,.pains li:hover,.modules li:hover{transform:translateY(-4px);box-shadow:0 16px 36px var(--glow)}
+  .pre{opacity:0;transform:translateY(28px)}
+  .reveal{transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+  .pulse{animation:pulse 2.4s ease-in-out infinite}
+}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{box-shadow:0 10px 24px rgba(255,176,32,.38)}50%{box-shadow:0 10px 40px rgba(255,176,32,.75)}}
+</style>
+
+<header class="hero">
+  <div class="bubbles" aria-hidden="true">
+    <span class="bub b1">Hello! 👋</span>
+    <span class="bub b2">How are you?</span>
+    <span class="bub b3">I can speak!</span>
+  </div>
+  <div class="hero-in">
+    <span class="demo">Үлгі сайт · портфолио үшін жасалған</span>
+    <nav>
+      <div class="logo">Til<span>Lab</span></div>
+      <a class="btn small" href="#tariff">Жазылу</a>
+    </nav>
+    <h1>2 айда ағылшынша <span class="hl">еркін сөйле</span></h1>
+    <p class="lead">Грамматиканы жаттамай, күнделікті өмірге арналған онлайн курс. Барлығы қазақ тілінде түсіндіріледі.</p>
+    <div class="facts">
+      <span><b>8</b> апта</span><span><b>24</b> сабақ</span><span><b>A1 → A2</b></span><span>📱 Телефоннан</span>
+    </div>
+    <div><a class="btn pulse" href="#tariff">Тарифті таңдау <span class="arr">→</span></a></div>
+  </div>
+</header>
+
+<div class="marquee-wrap" aria-hidden="true"><div class="marquee"><div class="track">
+  <span>Speak English</span><span>Қазақша түсіндіру</span><span>Сөйлеу клубы</span><span>Сертификат</span><span>Kaspi Red</span>
+  <span>Speak English</span><span>Қазақша түсіндіру</span><span>Сөйлеу клубы</span><span>Сертификат</span><span>Kaspi Red</span>
+</div></div></div>
+
+<div class="wrap">
+  <section>
+    <div class="head"><span class="eyebrow">Мәселе</span><h2>Бұл сізге <span class="hl">таныс</span> па?</h2></div>
+    <ul class="pains">
+      <li>Сөздерді білесіз, бірақ сөйлеуге келгенде ұяласыз</li>
+      <li>Мектепте 10 жыл оқыдыңыз, бірақ әңгіме құра алмайсыз</li>
+      <li>Ютубтан сабақ көресіз, бірақ жүйе жоқ, тез тастап кетесіз</li>
+      <li>Саяхатта немесе жұмыста ағылшынша сөйлеу керек</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="head"><span class="eyebrow">Бағдарлама</span><h2>6 модуль: нөлден <span class="hl">сөйлеуге</span> дейін</h2></div>
+    <ol class="modules">
+      <li><h3>Өзіңді таныстыру</h3><p>Есім, жұмыс, отбасы, қызығушылықтар туралы еркін айту</p></li>
+      <li><h3>Күнделікті өмір</h3><p>Дүкен, кафе, такси: ең жиі қолданылатын 200 фраза</p></li>
+      <li><h3>Өткен шақ</h3><p>Демалыс, оқиға туралы әңгімелеп беру</p></li>
+      <li><h3>Саяхат</h3><p>Әуежай, қонақүй, жол сұрау</p></li>
+      <li><h3>Жұмыс және хат</h3><p>Қысқа хат, хабарлама, телефонмен сөйлесу</p></li>
+      <li><h3>Сөйлеу клубы</h3><p>Топпен онлайн сөйлесу, қорытынды тест және сертификат</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="head"><span class="eyebrow">Формат</span><h2>Оқу <span class="hl">қалай</span> өтеді</h2></div>
+    <div class="grid2">
+      <div class="card"><div class="ico">🎬</div><h3>Видеосабақтар</h3><p>Әр сабақ 15–20 минут. Кез келген уақытта телефоннан көресіз.</p></div>
+      <div class="card"><div class="ico">🎧</div><h3>Үй тапсырмасы</h3><p>Аудиомен жауап бересіз, мұғалім тексеріп, кері байланыс береді.</p></div>
+      <div class="card"><div class="ico">💬</div><h3>WhatsApp тобы</h3><p>Сұрақтарға күн сайын жауап, басқа оқушылармен бірге қолдау.</p></div>
+      <div class="card"><div class="ico">🗣️</div><h3>Сөйлеу клубы</h3><p>Аптасына 1 рет Zoom-да тірі сөйлесу практикасы.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><span class="eyebrow">Пікірлер</span><h2>Оқушылар <span class="hl">не дейді</span></h2></div>
+    <div class="grid2">
+      <div class="card review"><span class="stars">★★★★★</span><p>«Бірінші рет ағылшынша сөйлеуден қорықпадым. Сөйлеу клубы өте пайдалы болды.»</p><span class="who"><span class="ava">А</span>Айгерім, Алматы</span></div>
+      <div class="card review"><span class="stars">★★★★★</span><p>«Жұмыстан кейін телефоннан оқыдым. 2 айда шетелдік клиентпен хат алмаса бастадым.»</p><span class="who"><span class="ava">Н</span>Нұрлан, Астана</span></div>
+    </div>
+  </section>
+
+  <section id="tariff">
+    <div class="head"><span class="eyebrow">Баға</span><h2>Өзіңе ыңғайлы <span class="hl">тарифті</span> таңда</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Өз бетімен</h3>
+        <div class="price">14 990 <small>₸</small></div>
+        <ul><li>24 видеосабақ</li><li>Жұмыс дәптері PDF</li><li>WhatsApp тобы</li></ul>
+        <a class="btn small" href="#contact">Таңдау</a>
+      </div>
+      <div class="card best">
+        <span class="tag">Ең танымал</span>
+        <h3>Мұғаліммен</h3>
+        <div class="price">29 990 <small>₸</small></div>
+        <ul><li>Барлық сабақтар</li><li>Үй тапсырмасын тексеру</li><li>Сөйлеу клубы</li><li>Сертификат</li></ul>
+        <a class="btn small" href="#contact">Таңдау <span class="arr">→</span></a>
+      </div>
+    </div>
+    <p class="note">Kaspi арқылы төлеу. Kaspi Red бөліп төлеу мүмкін.</p>
+  </section>
+
+  <section>
+    <div class="head"><span class="eyebrow">Сұрақтар</span><h2>Жиі қойылатын <span class="hl">сұрақтар</span></h2></div>
+    <div class="faq">
+      <details><summary>Мүлдем нөлден бастасам бола ма?</summary><p>Иә, курс нөлден және бастапқы деңгейден бастайтындарға арналған.</p></details>
+      <details><summary>Компьютер керек пе?</summary><p>Жоқ, барлық сабақты телефоннан оқуға болады.</p></details>
+      <details><summary>Сабақтарға қанша уақыт кетеді?</summary><p>Күніне 20–30 минут жеткілікті.</p></details>
+      <details><summary>Курс қанша уақыт ашық тұрады?</summary><p>Сабақтар 6 ай бойы ашық тұрады.</p></details>
+    </div>
+  </section>
+
+  <div class="cta" id="contact">
+    <div style="display:grid;gap:16px">
+      <h2>Келесі ағым 1 қарашада басталады</h2>
+      <div class="timer" id="timer"><div><b id="d">--</b><small>күн</small></div><div><b id="h">--</b><small>сағат</small></div><div><b id="m">--</b><small>минут</small></div></div>
+      <p>Орын саны шектеулі. WhatsApp-қа «КУРС» деп жазыңыз, толық ақпарат жібереміз.</p>
+      <div><span class="btn pulse">WhatsApp: +7 700 000 00 00</span></div>
+    </div>
+  </div>
+
+  <footer>© Til Lab · Үлгі сайт, деректер ойдан алынған</footer>
+</div>
+
+<script>
+(function(){
+  // countdown to Nov 1
+  var target=new Date('2026-11-01T10:00:00+05:00').getTime();
+  function tick(){var s=Math.max(0,target-Date.now())/1000;
+    document.getElementById('d').textContent=Math.floor(s/86400);
+    document.getElementById('h').textContent=String(Math.floor(s%86400/3600)).padStart(2,'0');
+    document.getElementById('m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');}
+  tick();setInterval(tick,30000);
+
+  // reveal only elements below the first screen; everything stays visible without JS
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var els=document.querySelectorAll('.head,.pains li,.modules li,.card,details,.cta');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}})},{threshold:.12});
+  els.forEach(function(el,i){
+    if(el.getBoundingClientRect().top>innerHeight){
+      el.classList.add('reveal','pre');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);
+    }
+  });
+})();
+</script>
+
+
+</body></html>

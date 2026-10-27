@@ -1,0 +1,538 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Игі Іс Трекері</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&subset=cyrillic&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+/* Layout: one-screen planner page on a gold coil, divider tabs on the right edge, small tumblers, coffee cups and sunglasses drifting down over the screen */
+:root{
+  --paper:#fcf4eb; --desk:#f1e4dc; --pink:#eaaab7; --pink-soft:#f9e0e3; --rose:#dc8e9f;
+  --tab1:#f6d3d9; --tab2:#efb9c4; --tab3:#f8dfe2;
+  --gold:#c9a052; --gold-lt:#ecd59c; --ink:#2f2426; --muted:#9a8285; --card:#fffaf5;
+  --f-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --f-script:"Great Vibes","Brush Script MT",cursive;
+  --f-body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:13px;overflow:hidden;
+  padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));
+  padding-block:10px;}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.book{position:relative;height:100%;max-width:520px;max-height:900px;margin:0 auto;padding-left:22px;padding-right:30px}
+.spiral{position:absolute;left:-6px;top:12px;bottom:12px;width:44px;z-index:4;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='26' viewBox='0 0 44 26'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f6e3a8'/%3E%3Cstop offset='.35' stop-color='%23d4ac5c'/%3E%3Cstop offset='.7' stop-color='%23a97c2e'/%3E%3Cstop offset='1' stop-color='%23e2c27a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M33 13.5 C27 5 12 4.5 8 8.5 C5 11.5 7 16 12 17.5 C18 19 26 18 31 16.5' fill='none' stroke='%237a5a26' stroke-opacity='.25' stroke-width='4.4' stroke-linecap='round' transform='translate(.8 1.4)'/%3E%3Cpath d='M33 13.5 C27 5 12 4.5 8 8.5 C5 11.5 7 16 12 17.5 C18 19 26 18 31 16.5' fill='none' stroke='url(%23g)' stroke-width='3.6' stroke-linecap='round'/%3E%3Cpath d='M30 10.5 C24 6.5 14 6.2 10.5 8.6' fill='none' stroke='%23fff6d6' stroke-opacity='.8' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") 0 0/44px 26px repeat-y;}
+.paper{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;background:var(--paper);border-radius:6px 14px 14px 6px;
+  box-shadow:0 14px 40px -18px rgba(150,90,100,.45),0 2px 0 rgba(255,255,255,.7) inset;
+  padding:16px 16px 18px 22px;overflow:hidden}
+.paper::before,.paper::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--pink);z-index:0}
+.paper::before{inset:8px 8px 8px 14px}
+.paper::after{inset:12px 12px 12px 18px;opacity:.55}
+.inner{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column}
+.holes{position:absolute;left:0;top:11px;bottom:12px;width:20px;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(circle at 10px 15px,#e2d2cb 0 2.4px,#c9a6ac 2.9px,#a87f86 3.4px,#fff 4.2px,rgba(255,255,255,0) 5.2px) 0 0/20px 26px repeat-y;}
+.holes::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 9.2px 14.2px,rgba(90,55,60,.4) 0 1.3px,transparent 2.3px) 0 0/20px 26px repeat-y}
+
+/* side divider tabs */
+.sidetabs{position:absolute;right:0;top:56px;bottom:56px;display:flex;flex-direction:column;gap:5px;z-index:1;max-height:420px}
+.sidetabs button,.sidetabs .deco{flex:1;writing-mode:vertical-rl;border:0;cursor:pointer;width:32px;padding:0 0 0 4px;
+  border-radius:0 12px 12px 0;font-size:9.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  background:var(--tab1);color:var(--ink);text-align:center;
+  box-shadow:2px 2px 6px -3px rgba(150,90,100,.4);transition:transform .3s,background .3s,color .3s}
+.sidetabs button:nth-child(2){background:var(--tab2)}
+.sidetabs button:nth-child(3){background:var(--tab3)}
+.sidetabs button[aria-selected="true"]{background:var(--pink);color:#fff;transform:translateX(4px)}
+.sidetabs .deco{flex:0 0 44px;cursor:default;color:var(--gold-lt);background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,0) 40%),linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.82) 60%,rgba(0,0,0,.9));-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);font-size:12px;letter-spacing:0;box-shadow:inset 0 0 0 1px rgba(201,160,82,.5),2px 2px 6px -3px rgba(0,0,0,.4)}
+
+.bow{position:absolute;right:4px;top:0;width:76px;z-index:2;transform-origin:50% 40%;animation:sway 6s ease-in-out infinite;filter:drop-shadow(1px 3px 3px rgba(190,120,135,.35))}
+@keyframes sway{0%,100%{transform:rotate(5deg)}50%{transform:rotate(10deg) translateY(2px)}}
+.bow g{transform-box:view-box}
+.bow .loopL{transform-origin:66px 54px;animation:loopL 3.2s ease-in-out infinite}
+.bow .loopR{transform-origin:74px 54px;animation:loopR 3.2s ease-in-out infinite}
+.bow .tailL{transform-origin:66px 60px;animation:tailL 2.6s ease-in-out infinite}
+.bow .tailR{transform-origin:74px 60px;animation:tailR 3s ease-in-out infinite}
+.bow .bglint{animation:bglint 3.2s ease-in-out infinite}
+@keyframes loopL{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(-5deg) scale(1.05,.97)}}
+@keyframes loopR{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(5deg) scale(1.05,.97)}}
+@keyframes tailL{0%,100%{transform:rotate(0) skewX(0)}50%{transform:rotate(7deg) skewX(-4deg)}}
+@keyframes tailR{0%,100%{transform:rotate(0) skewX(0)}50%{transform:rotate(-8deg) skewX(5deg)}}
+@keyframes bglint{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* black and gold details */
+
+.bookmark{position:absolute;left:62px;top:0;width:13px;height:46px;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.8) 38%,rgba(70,60,62,.75) 48%,rgba(0,0,0,.8) 58%,rgba(0,0,0,.94));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);
+  box-shadow:inset 0 0 0 1px rgba(201,160,82,.4)}
+.bookmark::after{content:"";position:absolute;left:2px;right:2px;top:0;bottom:6px;border-left:1px dashed rgba(236,213,156,.55);border-right:1px dashed rgba(236,213,156,.55)}
+.charm{position:absolute;left:61px;top:40px;width:15px;z-index:3;pointer-events:none;transform-origin:50% 0;animation:charm 2.8s ease-in-out infinite}
+@keyframes charm{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.corner{position:absolute;right:0;bottom:0;width:44px;height:44px;z-index:0;pointer-events:none;
+  background:linear-gradient(135deg,transparent 50%,rgba(0,0,0,.9) 50%,rgba(20,16,17,.82) 72%,rgba(0,0,0,.94));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);border-bottom-right-radius:14px}
+.corner::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent calc(50% + 5px),rgba(236,213,156,.75) calc(50% + 5px),rgba(236,213,156,.75) calc(50% + 6px),transparent calc(50% + 6px))}
+.spark{position:absolute;left:22px;top:20px;width:30px;z-index:2}
+.spark path{transform-box:fill-box;transform-origin:center;animation:twinkle 2.6s ease-in-out infinite}
+.spark path:nth-child(2){animation-delay:.8s}.spark path:nth-child(3){animation-delay:1.6s}
+@keyframes twinkle{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.55) rotate(20deg);opacity:.45}}
+
+header.cover{text-align:center;padding:16px 4px 0;flex:none}
+.the{display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:.35em;font-size:9px;font-weight:500}
+.the span{background:linear-gradient(180deg,#2a2224,#100c0d);color:var(--gold-lt);padding:4px 8px 4px 12px;border-radius:20px;border:1px solid var(--gold);box-shadow:0 2px 6px -2px rgba(0,0,0,.35)}
+.the::before,.the::after{content:"";height:1px;width:30px;background:var(--pink)}
+.title{font-family:var(--f-display);font-weight:500;color:var(--pink);font-size:clamp(24px,7.5vw,34px);line-height:1;margin:4px 0 0;letter-spacing:.04em;text-transform:uppercase}
+.script{font-family:var(--f-script);font-size:clamp(32px,10vw,44px);line-height:.9;margin-top:-4px;
+  background:linear-gradient(100deg,#b8862f 0%,#e0bf74 25%,#fff3c9 40%,#d9b468 55%,#b8862f 75%,#e0bf74 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold);animation:shimmer 5s linear infinite}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-150% 0}}
+.divider{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--pink);margin:4px 0 6px;font-size:11px}
+.divider span{display:inline-block;animation:beat 1.8s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.3)}30%{transform:scale(1)}45%{transform:scale(1.2)}}
+.divider::before,.divider::after{content:"";height:1px;flex:0 1 70px;background:var(--pink)}
+.namebar{height:2px;margin:6px auto 10px;width:58%;max-width:200px;
+  background:linear-gradient(180deg,#1a1415 0 1px,var(--gold) 1px 2px);
+  -webkit-mask:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent);mask:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent)}
+.nb-line{position:relative;flex:1;height:5px;overflow:hidden;border-radius:3px;
+  background:linear-gradient(180deg,#e8cf8e 0 1px,#141011 1px 4px,#b88a35 4px);
+  -webkit-mask:linear-gradient(90deg,transparent,#000 35%);mask:linear-gradient(90deg,transparent,#000 35%)}
+.nb-line.r{-webkit-mask:linear-gradient(270deg,transparent,#000 35%);mask:linear-gradient(270deg,transparent,#000 35%)}
+.nb-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 40%,rgba(255,240,200,.9) 50%,transparent 60%);background-size:300% 100%;animation:nbshine 3.5s linear infinite}
+.nb-line.r::after{animation-direction:reverse}
+@keyframes nbshine{from{background-position:100% 0}to{background-position:-100% 0}}
+.nb-gem{flex:none;width:22px;height:22px;display:grid;place-items:center;transform:rotate(45deg);border-radius:5px;
+  background:linear-gradient(135deg,#2e2628,#0e0b0c);border:1.5px solid var(--gold);box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--gold-lt),0 3px 8px -2px rgba(0,0,0,.4)}
+.nb-gem span{transform:rotate(-45deg);font-size:10px;line-height:1;color:var(--gold-lt);font-style:normal;display:inline-block;animation:gembeat 1.8s ease-in-out infinite}
+@keyframes gembeat{0%,100%{transform:rotate(-45deg) scale(1)}15%{transform:rotate(-45deg) scale(1.3)}30%{transform:rotate(-45deg) scale(1)}45%{transform:rotate(-45deg) scale(1.2)}}
+
+.page{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
+.page.enter{animation:pageIn .5s cubic-bezier(.2,.7,.3,1)}
+@keyframes pageIn{from{opacity:0;transform:translateX(18px) rotate(.6deg)}to{opacity:1;transform:none}}
+h2{font-family:var(--f-display);font-weight:600;font-size:21px;margin:0;line-height:1.1;text-align:center}
+.sub{color:var(--muted);text-align:center;font-size:9.5px;letter-spacing:.14em;margin-top:2px}
+.scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+
+.progress{flex:none;display:flex;align-items:center;gap:12px;background:linear-gradient(90deg,var(--pink-soft),rgba(249,224,227,.25));border-radius:30px 8px 30px 8px;padding:8px 12px}
+.ring{width:50px;height:50px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:18px;font-weight:600}
+.progress p{margin:0;line-height:1.35;font-size:11.5px;min-width:0}
+.progress strong{font-family:var(--f-script);font-weight:400;color:var(--rose);font-size:22px;display:block;line-height:1}
+
+.deeds{list-style:none;margin:0;padding:2px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
+.deed{position:relative;min-width:0}
+.deed button.chk{width:100%;height:100%;min-height:42px;display:flex;align-items:center;gap:7px;cursor:pointer;text-align:left;
+  padding:6px 8px;border-radius:14px;border:1px solid var(--pink-soft);background:var(--card);transition:background .25s,border-color .25s}
+.deed.on button.chk{background:var(--pink-soft);border-color:var(--pink)}
+.heart{width:18px;height:18px;flex:none;transition:transform .25s}
+.heart path{fill:transparent;stroke:var(--pink);stroke-width:1.8;transition:fill .25s,stroke .25s}
+.deed.on .heart path{fill:var(--rose);stroke:var(--rose)}
+.deed span.t{font-size:11.5px;line-height:1.2;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.deed.on span.t{color:var(--muted)}
+.del{position:absolute;top:-5px;right:-5px;width:20px;height:20px;border-radius:50%;border:0;background:var(--rose);color:#fff;font-size:12px;line-height:1;cursor:pointer;display:none}
+.editing .del{display:block}
+.editing .deed button.chk{animation:wiggle .35s ease-in-out infinite alternate}
+@keyframes wiggle{from{transform:rotate(-.8deg)}to{transform:rotate(.8deg)}}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.4)}100%{transform:scale(1)}}
+.deed.on.just .heart{animation:pop .45s ease}
+
+.fly{position:fixed;pointer-events:none;z-index:60;color:var(--rose);font-size:13px;animation:fly 1s ease-out forwards}
+@keyframes fly{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),-60px) scale(1.2) rotate(var(--r))}}
+
+.add{flex:none;display:flex;gap:6px}
+.add input{flex:1;min-width:0;border:1px solid var(--pink);background:var(--card);border-radius:30px;padding:9px 14px;font:inherit;font-size:16px;color:var(--ink);height:38px}
+.btn{border:0;background:var(--rose);color:#fff;border-radius:30px;padding:0 14px;font-weight:600;font-size:11px;letter-spacing:.08em;cursor:pointer;height:38px;flex:none}
+.btn.ghost{background:transparent;border:1px solid var(--pink);color:var(--rose);width:38px;padding:0;font-size:14px}
+.btn.ghost[aria-pressed="true"]{background:var(--pink);color:#fff}
+
+/* week */
+.week{flex:none;display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day{display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0 5px;border-radius:14px;background:var(--card);border:1px solid var(--pink-soft);min-width:0}
+.day.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-lt)}
+.day small{font-size:9px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.day b{font-family:var(--f-display);font-size:16px;font-variant-numeric:tabular-nums;line-height:1}
+.bar{width:7px;height:38px;border-radius:8px;background:var(--pink-soft);position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(var(--pink),var(--rose));border-radius:8px;transition:height .6s cubic-bezier(.2,.7,.3,1)}
+table.hab{border-collapse:collapse;width:100%;font-size:10.5px;table-layout:fixed}
+.hab col.name{width:38%}
+.hab th{font-weight:500;color:var(--muted);font-size:9px;letter-spacing:.04em;padding:2px 0;position:sticky;top:0;background:var(--paper)}
+.hab td{padding:3px 0;text-align:center;border-bottom:1px dashed var(--pink-soft)}
+.hab td:first-child{text-align:left;padding-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dot{display:inline-block;width:16px;height:16px;border-radius:50%;border:1px solid var(--pink);background:transparent;cursor:pointer;padding:0;transition:background .2s,transform .2s;vertical-align:middle}
+.dot.on{background:var(--rose);border-color:var(--rose);transform:scale(1.06)}
+.dot:disabled{opacity:.3;cursor:default}
+
+/* heart */
+.stats{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.stat{text-align:center;padding:8px 2px;border-radius:14px;background:var(--card);border:1px solid var(--pink-soft);min-width:0}
+.stat b{display:block;font-family:var(--f-display);font-size:24px;font-weight:600;color:var(--rose);font-variant-numeric:tabular-nums;line-height:1}
+.stat span{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.values{flex:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.ask{flex:none;display:flex;flex-direction:column;gap:6px}
+.ask label{font-size:9.5px;letter-spacing:.14em;color:var(--muted)}
+.ask .row{display:flex;gap:6px;align-items:stretch}
+textarea{flex:1;min-width:0;height:72px;border:1px solid var(--pink);border-radius:14px;background:repeating-linear-gradient(var(--card) 0 23px,var(--pink-soft) 23px 24px);padding:4px 12px;font:inherit;font-size:16px;line-height:24px;color:var(--ink);resize:none}
+.ask .btn{height:auto;width:52px;padding:0;font-size:18px}
+.notes{display:flex;flex-direction:column;gap:6px}
+.note{padding:8px 12px;border-left:2px solid var(--gold-lt);background:var(--card);border-radius:0 12px 12px 0}
+.note small{color:var(--gold);font-size:10px;letter-spacing:.1em}
+.note p{margin:2px 0 0;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.saved{color:var(--rose);font-size:11px;text-align:center;min-height:14px;flex:none}
+.quote{flex:none;text-align:center;font-family:var(--f-script);color:var(--rose);font-size:22px;line-height:1}
+
+/* falling things */
+.rain{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.faller{position:absolute;top:0;left:var(--x);width:var(--w);will-change:transform;
+  animation:fall var(--d) linear var(--delay) infinite;transform:translate3d(0,-120px,0)}
+.faller svg{display:block;width:100%;height:auto;animation:drift var(--s,4s) ease-in-out infinite alternate;filter:drop-shadow(1px 3px 3px rgba(180,123,134,.3))}
+@keyframes fall{
+  0%{transform:translate3d(0,-120px,0);opacity:0}
+  8%{opacity:.95}
+  90%{opacity:.95}
+  100%{transform:translate3d(0,calc(100vh + 40px),0);opacity:0}}
+@keyframes drift{from{transform:translateX(-14px) rotate(var(--r1,-14deg))}to{transform:translateX(14px) rotate(var(--r2,14deg))}}
+
+/* life: chips, days, notes */
+@keyframes chipIn{from{transform:translateY(12px) scale(.92);opacity:.15}}
+@keyframes rowIn{from{transform:translateX(14px);opacity:.15}}
+@keyframes grow{from{height:0}}
+@keyframes soft{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.intro .deed{animation:chipIn .55s cubic-bezier(.2,.8,.3,1.25) backwards;animation-delay:calc(var(--i,0)*50ms)}
+.deed button.chk{position:relative;overflow:hidden;transition:background .25s,border-color .25s,transform .2s,box-shadow .2s}
+.deed button.chk:hover{transform:translateY(-2px);box-shadow:0 6px 14px -8px rgba(220,142,159,.7)}
+.deed button.chk:active{transform:scale(.95)}
+.deed.on button.chk{box-shadow:0 4px 12px -8px rgba(220,142,159,.8)}
+.deed.on button.chk::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.75) 50%,transparent 70%);transform:translateX(-120%);animation:sheen 4s ease-in-out infinite;animation-delay:calc(var(--i,0)*.35s)}
+@keyframes sheen{0%,62%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+.deed.on .heart{animation:hb 2.6s ease-in-out infinite;animation-delay:calc(var(--i,0)*.25s)}
+@keyframes hb{0%,100%{transform:scale(1)}8%{transform:scale(1.25)}16%{transform:scale(1)}24%{transform:scale(1.15)}32%{transform:scale(1)}}
+.deed:not(.on) .heart path{animation:breathe 3s ease-in-out infinite;animation-delay:calc(var(--i,0)*.2s)}
+@keyframes breathe{0%,100%{stroke:var(--pink)}50%{stroke:var(--rose)}}
+
+.intro .day{animation:chipIn .5s cubic-bezier(.2,.8,.3,1.25) backwards;animation-delay:calc(var(--i,0)*60ms)}
+.intro .bar i{animation:grow 1s cubic-bezier(.2,.8,.3,1) backwards;animation-delay:calc(var(--i,0)*60ms + .25s)}
+.day{transition:transform .2s}
+.day:hover{transform:translateY(-3px)}
+.day.today{animation:glow 2.4s ease-in-out infinite}
+.intro .day.today{animation:chipIn .5s cubic-bezier(.2,.8,.3,1.25) backwards,glow 2.4s ease-in-out .8s infinite;animation-delay:calc(var(--i,0)*60ms),.8s}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px var(--gold-lt)}50%{box-shadow:0 0 0 3px var(--gold-lt),0 6px 14px -6px rgba(201,160,82,.7)}}
+.day.today .bar i{background:linear-gradient(var(--gold-lt),var(--gold))}
+.intro .hab tbody tr{animation:rowIn .45s ease backwards;animation-delay:calc(var(--i,0)*40ms + .35s)}
+.dot:hover:not(:disabled){transform:scale(1.22)}
+.dot.on{box-shadow:0 0 0 2px var(--pink-soft)}
+
+.intro .stat{animation:chipIn .5s cubic-bezier(.2,.8,.3,1.25) backwards;animation-delay:calc(var(--i,0)*90ms)}
+.intro .note{animation:rowIn .45s ease backwards;animation-delay:calc(var(--i,0)*70ms + .3s)}
+.values span{animation:valGlow 4s ease-in-out infinite}
+.values span:nth-child(2){animation-delay:1s}.values span:nth-child(3){animation-delay:2s}.values span:nth-child(4){animation-delay:3s}
+@keyframes valGlow{0%,100%{color:var(--gold)}50%{color:var(--rose)}}
+textarea{transition:box-shadow .3s,border-color .3s}
+textarea:focus,textarea:focus-visible{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px var(--pink-soft),0 8px 18px -10px rgba(220,142,159,.8)}
+.ask label::before{content:"✎";display:inline-block;margin-right:6px;color:var(--gold);font-size:12px;animation:write 1.8s ease-in-out infinite}
+@keyframes write{0%,100%{transform:rotate(0) translateX(0)}50%{transform:rotate(-14deg) translateX(3px)}}
+.ask .btn{animation:soft 2.4s ease-in-out infinite}
+.note{transition:transform .2s}
+.note:hover{transform:translateX(3px)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rain{display:none}}
+@media (max-height:640px){.title{font-size:22px}.script{font-size:30px}.bow{width:50px}.deed button.chk{min-height:36px}.bar{height:28px}}
+@media (min-width:600px){body{padding-block:20px}}
+</style>
+
+<!-- shapes for the falling layer -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="tb" x1="0" x2="1"><stop offset="0" stop-color="#f3c8cf"/><stop offset=".45" stop-color="#fbe3e6"/><stop offset="1" stop-color="#eeb9c3"/></linearGradient>
+    <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#b8862f"/><stop offset=".5" stop-color="#f1d995"/><stop offset="1" stop-color="#b8862f"/></linearGradient>
+    <linearGradient id="cupg" x1="0" x2="1"><stop offset="0" stop-color="#f4ece4"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#ece2d8"/></linearGradient>
+    <symbol id="s-tumbler" viewBox="0 0 40 100">
+      <rect x="3" y="12" width="34" height="86" rx="7" fill="url(#tb)"/>
+      <rect x="2" y="2" width="36" height="12" rx="4" fill="url(#gl)"/>
+      <rect x="3" y="13" width="34" height="3" fill="#dcd6d2"/>
+      <path d="M20 70 c-2 -2 -5 -3.5 -5 -6.5 a2.5 2.5 0 0 1 5 -.8 a2.5 2.5 0 0 1 5 .8 c0 3 -3 4.5 -5 6.5z" fill="#eaaab7"/>
+      <rect x="11" y="38" width="18" height="1.6" rx=".8" fill="#2f2426" opacity=".55"/>
+      <rect x="13" y="44" width="14" height="1.6" rx=".8" fill="#2f2426" opacity=".55"/>
+      <rect x="11" y="50" width="18" height="1.6" rx=".8" fill="#2f2426" opacity=".55"/>
+    </symbol>
+    <symbol id="s-coffee" viewBox="0 0 50 80">
+      <path d="M6 18 L44 18 L39 78 L11 78 Z" fill="url(#cupg)" stroke="#e8dcd2"/>
+      <rect x="2" y="10" width="46" height="9" rx="4" fill="#fbf8f5" stroke="#e8dcd2"/>
+      <rect x="7" y="5" width="36" height="6" rx="3" fill="#fbf8f5" stroke="#e8dcd2"/>
+      <path d="M8 34 L42 34 L40 60 L10 60 Z" fill="#f5cfd5"/>
+      <path d="M25 52 c-2 -2 -5 -3.5 -5 -6.5 a2.5 2.5 0 0 1 5 -.8 a2.5 2.5 0 0 1 5 .8 c0 3 -3 4.5 -5 6.5z" fill="#dc8e9f"/>
+    </symbol>
+    <symbol id="s-glasses" viewBox="-14 0 124 44">
+      <path d="M1 16 L-12 8" stroke="url(#gl)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M93 16 L106 8" stroke="url(#gl)" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="22" cy="24" rx="21" ry="17" fill="#3a2823" stroke="url(#gl)" stroke-width="3"/>
+      <ellipse cx="72" cy="24" rx="21" ry="17" fill="#3a2823" stroke="url(#gl)" stroke-width="3"/>
+      <path d="M42 18 Q47 11 52 18" fill="none" stroke="url(#gl)" stroke-width="3"/>
+      <path d="M8 16 L16 30" stroke="#fff" stroke-opacity=".35" stroke-width="4" stroke-linecap="round"/>
+      <path d="M58 16 L66 30" stroke="#fff" stroke-opacity=".35" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="s-heart" viewBox="0 0 24 22"><path d="M12 21s-8-5-10-10C.6 7.5 3 3.5 6.6 3.5c2.2 0 3.7 1.2 5.4 3.2 1.7-2 3.2-3.2 5.4-3.2C21 3.5 23.4 7.5 22 11c-2 5-10 10-10 10z" fill="#eaaab7"/></symbol>
+    <symbol id="s-spark" viewBox="0 0 24 24"><path d="M12 1 Q13.5 10.5 23 12 Q13.5 13.5 12 23 Q10.5 13.5 1 12 Q10.5 10.5 12 1Z" fill="#c9a052"/></symbol>
+  </defs>
+</svg>
+
+<div class="rain" id="rain" aria-hidden="true"></div>
+
+<div class="book">
+  <div class="spiral" aria-hidden="true"></div>
+
+  <div class="sidetabs" role="tablist" aria-label="Беттер">
+    <button role="tab" aria-selected="true" data-go="today">Бүгін</button>
+    <button role="tab" aria-selected="false" data-go="week">Апта</button>
+    <button role="tab" aria-selected="false" data-go="heart">Күнделік</button>
+    <div class="deco" aria-hidden="true">♥</div>
+  </div>
+
+  <div class="paper">
+    <div class="holes" aria-hidden="true"></div>
+    <div class="bookmark" aria-hidden="true"></div>
+    <svg class="charm" viewBox="0 0 30 34" aria-hidden="true"><defs><linearGradient id="cg" x1="0" x2="1"><stop offset="0" stop-color="#b8862f"/><stop offset=".5" stop-color="#f6e3a8"/><stop offset="1" stop-color="#b8862f"/></linearGradient></defs><circle cx="15" cy="4" r="2.6" fill="none" stroke="url(#cg)" stroke-width="1.6"/><path d="M15 32s-12-7.5-13.5-15C.6 12 4 8 8.5 8c3 0 5 1.6 6.5 4 1.5-2.4 3.5-4 6.5-4C26 8 29.4 12 28.5 17 27 24.5 15 32 15 32z" fill="url(#cg)"/><path d="M7 14c1-2 3-3 5-2.6" stroke="#fff8dc" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    <div class="corner" aria-hidden="true"></div>
+    <svg class="spark" viewBox="0 0 60 70" aria-hidden="true">
+      <g fill="none" stroke="#c9a052" stroke-width="1.8" stroke-linejoin="round">
+        <path d="M14 4 Q16 16 26 18 Q16 20 14 32 Q12 20 2 18 Q12 16 14 4Z"/>
+        <path d="M38 22 Q40 31 47 33 Q40 35 38 44 Q36 35 29 33 Q36 31 38 22Z"/>
+        <path d="M18 44 Q19 51 25 52 Q19 53 18 60 Q17 53 11 52 Q17 51 18 44Z"/>
+      </g>
+    </svg>
+    <svg class="bow" viewBox="0 0 140 130" aria-hidden="true">
+      <defs>
+        <linearGradient id="bs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde9ec"/><stop offset=".35" stop-color="#f6c9d2"/><stop offset=".7" stop-color="#eba9b8"/><stop offset="1" stop-color="#f8d6dc"/></linearGradient>
+        <linearGradient id="bs2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde9ec"/><stop offset=".35" stop-color="#f6c9d2"/><stop offset=".7" stop-color="#eba9b8"/><stop offset="1" stop-color="#f8d6dc"/></linearGradient>
+        <linearGradient id="bt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9a3b3"/><stop offset=".45" stop-color="#f8d3da"/><stop offset="1" stop-color="#efb4c1"/></linearGradient>
+        <radialGradient id="bk" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbe0e5"/><stop offset="1" stop-color="#df93a5"/></radialGradient>
+      </defs>
+      <g class="tailL"><path d="M64 58 C56 78 44 98 34 120 L46 114 L52 124 C60 102 66 80 70 62 Z" fill="url(#bt)" stroke="#e2a0af" stroke-width=".8"/><path d="M62 66 C56 84 48 100 42 114" stroke="#fff" stroke-opacity=".55" stroke-width="1.4" fill="none" stroke-linecap="round"/></g>
+      <g class="tailR"><path d="M76 58 C84 78 96 98 106 120 L94 114 L88 124 C80 102 74 80 70 62 Z" fill="url(#bt)" stroke="#e2a0af" stroke-width=".8"/><path d="M80 68 C86 84 92 98 98 110" stroke="#fff" stroke-opacity=".4" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <g class="loopL">
+        <path d="M66 50 C52 30 22 14 12 26 C4 36 10 58 30 62 C44 65 58 60 66 56 Z" fill="url(#bs1)" stroke="#e2a0af" stroke-width=".8"/>
+        <path d="M66 52 C54 40 34 30 24 34 C30 44 46 52 66 55 Z" fill="#d98b9d" opacity=".35"/>
+        <path d="M18 31 C28 23 46 28 58 41" stroke="#fff" stroke-opacity=".75" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="loopR">
+        <path d="M74 50 C88 30 118 14 128 26 C136 36 130 58 110 62 C96 65 82 60 74 56 Z" fill="url(#bs2)" stroke="#e2a0af" stroke-width=".8"/>
+        <path d="M74 52 C86 40 106 30 116 34 C110 44 94 52 74 55 Z" fill="#d98b9d" opacity=".35"/>
+        <path d="M122 31 C112 23 94 28 82 41" stroke="#fff" stroke-opacity=".6" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <rect x="61" y="44" width="18" height="20" rx="7" fill="url(#bk)" stroke="#e2a0af" stroke-width=".8"/>
+      <path d="M65 49 C68 53 72 53 75 49" stroke="#d98b9d" stroke-opacity=".6" fill="none"/>
+      <ellipse class="bglint" cx="67" cy="49" rx="2.4" ry="3.4" fill="#fff"/>
+    </svg>
+
+    <div class="inner">
+      <header class="cover">
+        <div class="title">Игі істер</div>
+        <div class="script">Анара</div>
+        <div class="namebar" aria-hidden="true"></div>
+      </header>
+
+      <!-- PAGE 1 -->
+      <section class="page" data-page="today" id="pgToday">
+        <div style="flex:none">
+          <h2 id="todayDate">Бүгін</h2>
+          <div class="sub">БҮГІНГІ ЖАҚСЫЛЫҚТАРЫМ</div>
+        </div>
+        <div class="progress">
+          <div class="ring">
+            <svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="30" fill="none" stroke="#fcf4eb" stroke-width="7"/>
+              <circle id="ringArc" cx="35" cy="35" r="30" fill="none" stroke="#dc8e9f" stroke-width="7" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition:stroke-dashoffset .6s"/></svg>
+            <b id="ringNum">0</b>
+          </div>
+          <p><strong id="cheer">be kind.</strong><span id="cheerTxt">Бір кішкентай жақсылықтан баста.</span></p>
+        </div>
+        <div class="scroll" style="flex:0 1 auto"><ul class="deeds" id="deedList"></ul></div>
+        <form class="add" id="addForm">
+          <input id="newDeed" type="text" maxlength="40" placeholder="Өз жақсылығыңды қос…" aria-label="Жаңа игі іс">
+          <button class="btn" type="submit">ҚОСУ</button>
+          <button class="btn ghost" type="button" id="editBtn" aria-pressed="false" aria-label="Тізімді өзгерту">✎</button>
+        </form>
+        <div class="quote" style="margin-top:auto">plan it. do it.<br>be that girl.</div>
+      </section>
+
+      <!-- PAGE 2 -->
+      <section class="page" data-page="week" hidden>
+        <div style="flex:none">
+          <h2>Менің аптам</h2>
+          <div class="sub" id="weekRange"></div>
+        </div>
+        <div class="week" id="weekGrid"></div>
+        <div class="scroll"><table class="hab" id="habTable"></table></div>
+        <div class="quote">plan it. do it. be kind.</div>
+      </section>
+
+      <!-- PAGE 3 -->
+      <section class="page" data-page="heart" hidden>
+        <div style="flex:none">
+          <h2>Жүрек күнделігі</h2>
+          <div class="sub">АЛҒЫС ЖӘНЕ ОЙЛАР</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="stTotal">0</b><span>Барлық іс</span></div>
+          <div class="stat"><b id="stStreak">0</b><span>Күн қатар</span></div>
+          <div class="stat"><b id="stDays">0</b><span>Белсенді күн</span></div>
+        </div>
+        <div class="values"><span>Мейірім</span><span>Сабыр</span><span>Алғыс</span><span>Адалдық</span></div>
+        <div class="ask">
+          <label for="note">БҮГІН НЕГЕ АЛҒЫС АЙТАСЫҢ?</label>
+          <div class="row">
+            <textarea id="note" placeholder="Бүгін мен … үшін алғыс айтамын"></textarea>
+            <button class="btn" id="saveNote" type="button" aria-label="Сақтау">♥</button>
+          </div>
+        </div>
+        <div class="saved" id="savedMsg" aria-live="polite"></div>
+        <div class="scroll"><div class="notes" id="notesList"></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const MONTHS=["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан"];
+  const WD=["Жс","Дс","Сс","Ср","Бс","Жм","Сн"];
+  const DEFAULT=["Ата-анама қоңырау шалдым","Біреуге көмектестім","Садақа бердім","Жылы сөз айттым","Кітап оқыдым","Үй шаруасына көмектестім","Біреуге күлімдедім","Жануарды тамақтандырдым","Алғыс айттым","Біреуді кешірдім"];
+  const KEY="izgi-is-v1";
+  let S;
+  try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){S=null}
+  if(!S||!Array.isArray(S.deeds)) S={deeds:DEFAULT.map((n,i)=>({id:"d"+i,name:n})),log:{},notes:{},seq:DEFAULT.length};
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+  const pad=n=>String(n).padStart(2,"0");
+  const key=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  const today=new Date();today.setHours(12,0,0,0);
+  const TK=key(today);
+  const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+  const fmt=d=>d.getDate()+" "+MONTHS[d.getMonth()];
+  const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const dayLog=k=>(S.log[k]||[]).filter(id=>S.deeds.some(d=>d.id===id));
+  const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const heart='<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.2-9.3C1.6 7.9 3.7 4.5 7 4.5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.3 0 5.4 3.4 4.2 6.7-1.7 4.7-9.2 9.3-9.2 9.3z"/></svg>';
+  let justId=null;
+
+  /* falling tumblers, coffee and sunglasses */
+  const FALL=[
+    {s:"tumbler",x:6, w:22,d:15,delay:0,  r1:-18,r2:10},
+    {s:"glasses",x:58,w:46,d:17,delay:2.5,r1:-10,r2:16},
+    {s:"coffee", x:30,w:26,d:16,delay:5,  r1:-12,r2:12},
+    {s:"heart",  x:80,w:14,d:12,delay:1,  r1:-20,r2:20},
+    {s:"spark",  x:44,w:12,d:11,delay:7,  r1:0,  r2:90},
+    {s:"tumbler",x:74,w:20,d:18,delay:9,  r1:-8, r2:18},
+    {s:"coffee", x:12,w:24,d:17,delay:11.5,r1:-14,r2:8},
+    {s:"glasses",x:22,w:40,d:19,delay:14, r1:-16,r2:8},
+    {s:"heart",  x:50,w:12,d:13,delay:6,  r1:-20,r2:20},
+    {s:"spark",  x:88,w:10,d:12,delay:3.5,r1:0,  r2:90}
+  ];
+  const rain=document.getElementById("rain");
+  rain.innerHTML=FALL.map(f=>{
+    const vb=f.s==="glasses"?"-14 0 124 44":f.s==="tumbler"?"0 0 40 100":f.s==="coffee"?"0 0 50 80":f.s==="heart"?"0 0 24 22":"0 0 24 24";
+    return `<div class="faller" style="--x:${f.x}%;--w:${f.w}px;--d:${f.d}s;--delay:${f.delay}s;--r1:${f.r1}deg;--r2:${f.r2}deg;--s:${3+f.d%3}s"><svg viewBox="${vb}"><use href="#s-${f.s}"/></svg></div>`}).join("");
+
+  function burst(x,y){
+    if(reduce)return;
+    for(let i=0;i<7;i++){
+      const s=document.createElement("span");s.className="fly";s.textContent=i%3?"♥":"✦";
+      s.style.left=(x-6)+"px";s.style.top=(y-8)+"px";
+      s.style.setProperty("--dx",(Math.random()*80-40)+"px");s.style.setProperty("--r",(Math.random()*60-30)+"deg");
+      s.style.animationDelay=(i*40)+"ms";if(i%3===0)s.style.color="var(--gold)";
+      document.body.appendChild(s);setTimeout(()=>s.remove(),1300);
+    }
+  }
+
+  function renderToday(){
+    document.getElementById("todayDate").textContent=fmt(today)+", "+["жексенбі","дүйсенбі","сейсенбі","сәрсенбі","бейсенбі","жұма","сенбі"][today.getDay()];
+    const done=dayLog(TK);
+    document.getElementById("deedList").innerHTML=S.deeds.map(d=>{
+      const on=done.includes(d.id);
+      return `<li class="deed${on?" on":""}${justId===d.id?" just":""}"><button class="chk" type="button" data-id="${d.id}" aria-pressed="${on}">${heart}<span class="t">${esc(d.name)}</span></button><button class="del" type="button" data-del="${d.id}" aria-label="Өшіру: ${esc(d.name)}">×</button></li>`}).join("");
+    justId=null;
+    const n=done.length,total=S.deeds.length||1;
+    document.getElementById("ringNum").textContent=n;
+    document.getElementById("ringArc").setAttribute("stroke-dashoffset",188.5*(1-Math.min(n/total,1)));
+    const [c,t]=n===0?["be kind.","Бір кішкентай жақсылықтан баста."]:n<3?["good start!","Жақсы бастама. Жалғастыр!"]:n<6?["glow girl!","Жүрегің жарқырап тұр."]:["that girl.","Бүгін керемет күн болды!"];
+    document.getElementById("cheer").textContent=c;
+    document.getElementById("cheerTxt").textContent=t+" "+n+" / "+S.deeds.length;
+  }
+  function weekDays(){const dow=(today.getDay()+6)%7;const mon=addDays(today,-dow);return Array.from({length:7},(_,i)=>addDays(mon,i))}
+  function renderWeek(){
+    const days=weekDays();
+    document.getElementById("weekRange").textContent=(fmt(days[0])+" — "+fmt(days[6])).toUpperCase();
+    const max=Math.max(S.deeds.length,1);
+    document.getElementById("weekGrid").innerHTML=days.map(d=>{const k=key(d),n=dayLog(k).length;
+      return `<div class="day${k===TK?" today":""}"><small>${WD[d.getDay()]}</small><div class="bar"><i style="height:${Math.round(n/max*100)}%"></i></div><b>${n}</b></div>`}).join("");
+    let h='<colgroup><col class="name">'+days.map(()=>"<col>").join("")+"</colgroup><thead><tr><th></th>"+days.map(d=>`<th>${WD[d.getDay()]}</th>`).join("")+"</tr></thead><tbody>";
+    S.deeds.forEach(dd=>{
+      h+=`<tr><td title="${esc(dd.name)}">${esc(dd.name)}</td>`+days.map(d=>{const k=key(d),on=dayLog(k).includes(dd.id),fut=d>today;
+        return `<td><button type="button" class="dot${on?" on":""}" data-k="${k}" data-id="${dd.id}"${fut?" disabled":""} aria-label="${esc(dd.name)}, ${fmt(d)}" aria-pressed="${on}"></button></td>`}).join("")+"</tr>";
+    });
+    document.getElementById("habTable").innerHTML=h+"</tbody>";
+  }
+  function renderHeart(){
+    let total=0,active=0;
+    Object.keys(S.log).forEach(k=>{const n=dayLog(k).length;total+=n;if(n)active++});
+    let streak=0,d=new Date(today);
+    if(!dayLog(TK).length)d=addDays(d,-1);
+    while(dayLog(key(d)).length){streak++;d=addDays(d,-1)}
+    document.getElementById("stTotal").textContent=total;
+    document.getElementById("stStreak").textContent=streak;
+    document.getElementById("stDays").textContent=active;
+    const ta=document.getElementById("note");if(document.activeElement!==ta)ta.value=S.notes[TK]||"";
+    const ks=Object.keys(S.notes).filter(k=>S.notes[k].trim()).sort().reverse();
+    document.getElementById("notesList").innerHTML=ks.length?ks.map(k=>{const [y,m,dd]=k.split("-").map(Number);
+      return `<div class="note"><small>${dd} ${MONTHS[m-1]} ${y}</small><p>${esc(S.notes[k])}</p></div>`}).join("")
+      :'<p class="sub" style="margin:0">Алғашқы алғыс жазбаң осында пайда болады ♥</p><div class="quote" style="margin-top:10px">girl, you can do<br>good things.</div>';
+  }
+  function toggle(k,id,el){
+    const arr=S.log[k]||(S.log[k]=[]);const i=arr.indexOf(id);
+    if(i>=0)arr.splice(i,1);else{arr.push(id);if(k===TK)justId=id;if(el){const r=el.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2)}}
+    save();renderAll();
+  }
+  function idx(){
+    ["#deedList .deed","#weekGrid .day","#habTable tbody tr","#notesList .note",".stats .stat"].forEach(sel=>document.querySelectorAll(sel).forEach((el,i)=>el.style.setProperty("--i",i)));
+  }
+  function renderAll(){renderToday();renderWeek();renderHeart();idx()}
+  let introT;
+  function intro(s){if(reduce)return;s.classList.remove("intro");void s.offsetWidth;s.classList.add("intro");clearTimeout(introT);introT=setTimeout(()=>s.classList.remove("intro"),1600)}
+  function countUp(){
+    if(reduce)return;
+    ["stTotal","stStreak","stDays"].forEach(id=>{const el=document.getElementById(id),t=+el.textContent;if(!t)return;const t0=performance.now();
+      (function f(now){const p=Math.min((now-t0)/900,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)});
+  }
+
+  const pgToday=document.getElementById("pgToday"),editBtn=document.getElementById("editBtn");
+  editBtn.addEventListener("click",()=>{const on=!pgToday.classList.contains("editing");pgToday.classList.toggle("editing",on);editBtn.setAttribute("aria-pressed",on);editBtn.textContent=on?"✓":"✎"});
+  document.getElementById("deedList").addEventListener("click",e=>{
+    const del=e.target.closest("[data-del]");
+    if(del){S.deeds=S.deeds.filter(d=>d.id!==del.dataset.del);save();renderAll();return}
+    if(pgToday.classList.contains("editing"))return;
+    const b=e.target.closest("[data-id]");if(b)toggle(TK,b.dataset.id,b.querySelector(".heart"));
+  });
+  document.getElementById("habTable").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(b&&!b.disabled)toggle(b.dataset.k,b.dataset.id,b)});
+  document.getElementById("addForm").addEventListener("submit",e=>{
+    e.preventDefault();const inp=document.getElementById("newDeed");const v=inp.value.trim();if(!v)return;
+    S.seq=(S.seq||S.deeds.length)+1;S.deeds.push({id:"c"+S.seq+"_"+Date.now().toString(36),name:v});inp.value="";inp.blur();save();renderAll();
+    const sc=pgToday.querySelector(".scroll");sc.scrollTop=sc.scrollHeight;
+  });
+  document.getElementById("saveNote").addEventListener("click",e=>{
+    S.notes[TK]=document.getElementById("note").value;save();renderHeart();
+    const m=document.getElementById("savedMsg");m.textContent="Сақталды ♥";setTimeout(()=>m.textContent="",2000);
+    const r=e.currentTarget.getBoundingClientRect();burst(r.left+r.width/2,r.top);
+  });
+
+  const tabs=[...document.querySelectorAll(".sidetabs button")];
+  function go(p){
+    document.querySelectorAll(".page").forEach(s=>{const on=s.dataset.page===p;s.hidden=!on;s.classList.remove("enter");if(on){void s.offsetWidth;s.classList.add("enter");intro(s)}});
+    if(p==="heart")countUp();
+    tabs.forEach(t=>t.setAttribute("aria-selected",t.dataset.go===p));
+  }
+  tabs.forEach(t=>t.addEventListener("click",()=>go(t.dataset.go)));
+  renderAll();
+  intro(pgToday);
+  const h=location.hash.slice(1);if(["today","week","heart"].includes(h))go(h);
+})();
+</script>
+
+</body></html>
