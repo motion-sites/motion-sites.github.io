@@ -1,0 +1,346 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style></head><body>
+<title>Обведи букву · Нур Арабик</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@800&family=Nunito:wght@800;900&display=swap">
+<style>
+/* Layout: warm courtyard backdrop (frame from Amina's letter videos); home = swaying glossy alphabet grid, RTL; trace = glossy board + back + voice */
+:root{
+  --ink:#4a2a10; --ink-soft:#7a5530; --glass:rgba(255,249,238,.62); --glass-line:rgba(255,255,255,.8);
+  --board:#fffdf8; --track:#fbf1e1; --track-shadow:#ead6b8; --dotgrid:#f0e2cc;
+  --ok:#2fbf68; --ok-dark:#1f914d; --oops:#e04848; --gold:#ffc23a; --gold-dark:#d98f00;
+  --display:'Nunito','Arial Rounded MT Bold',system-ui,sans-serif;
+  --arabic:'Baloo Bhaijaan 2','Noto Naskh Arabic','Geeza Pro',serif;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;color:var(--ink);font-family:var(--display);overflow-x:hidden;
+  background:#e9cfa4 url(https://motion-sites.github.io/nur-assets/bg.jpg) center/cover fixed no-repeat;
+  -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(120% 70% at 50% 0%,rgba(255,236,190,.55),rgba(255,236,200,.2) 60%),linear-gradient(180deg,rgba(255,246,230,.25),rgba(255,238,210,.55))}
+.glint{position:fixed;inset:0;pointer-events:none;z-index:0}
+.glint i{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff6c8;box-shadow:0 0 10px 3px rgba(255,214,120,.8);animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
+.app{position:relative;z-index:1;max-width:560px;margin:0 auto;min-height:100%;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 22px}
+.screen{display:flex;flex-direction:column;gap:14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:13px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-soft)}
+h1{margin:2px 0 0;font-weight:900;font-size:clamp(26px,7.5vw,34px);line-height:1.05;color:#fff;
+  text-shadow:0 2px 0 #c77a1e,0 4px 0 #a85f10,0 8px 14px rgba(90,45,0,.35);text-wrap:balance}
+.stars{display:flex;align-items:center;gap:6px;background:var(--glass);border:2px solid var(--glass-line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border-radius:999px;padding:6px 14px 6px 8px;font-weight:900;font-size:20px;box-shadow:0 5px 0 rgba(160,105,30,.25);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stars svg{width:28px;height:28px}
+
+/* ---- alphabet grid ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;direction:rtl}
+.tile{position:relative;aspect-ratio:1/1;max-width:100%;border:2px solid var(--glass-line);border-radius:24px;cursor:pointer;padding:0;
+  background:var(--glass);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  box-shadow:0 6px 0 rgba(160,105,30,.22),0 10px 18px rgba(90,45,0,.12);display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:transform .15s}
+.tile:active{transform:translateY(4px)}
+.tile:focus-visible,.btn:focus-visible,.round:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.glyph{position:relative;display:block;font-family:var(--arabic);font-weight:800;font-size:clamp(40px,12vw,54px);line-height:1;padding-bottom:.12em;
+  color:var(--c);text-shadow:0 1px 0 var(--cd),0 2px 0 var(--cd),0 3px 0 var(--cd),0 4px 0 var(--cd),0 5px 0 var(--cd),0 10px 10px rgba(90,45,0,.3);
+  animation:sway var(--dur,3s) ease-in-out var(--del,0s) infinite alternate;transform-origin:50% 80%}
+.glyph::after{content:attr(data-ch);position:absolute;inset:0;color:transparent;text-shadow:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.85) 0%,rgba(255,255,255,.25) 32%,rgba(255,255,255,0) 50%);-webkit-background-clip:text;background-clip:text}
+@keyframes sway{from{transform:rotate(-6deg) translateY(2px)}to{transform:rotate(6deg) translateY(-4px)}}
+.tile:not(.locked) .glyph{font-size:clamp(46px,14vw,62px)}
+.tile.locked{background:rgba(255,249,238,.38)}
+.tile.locked .glyph{filter:saturate(.35) brightness(1.08);opacity:.6}
+.badge{position:absolute;top:-8px;left:-6px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.badge.lock{background:#fff;box-shadow:0 3px 0 rgba(160,105,30,.3)}
+.badge svg{width:100%;height:100%}
+.badge.lock svg{width:15px;height:15px}
+.tile.open::before{content:"";position:absolute;inset:-4px;border-radius:28px;border:3px solid #fff;opacity:.9;animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{opacity:.25;transform:scale(1.04)}}
+.tile.bounce .glyph{animation:jump .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes jump{0%{transform:scale(1)}40%{transform:scale(1.35) translateY(-8px)}100%{transform:scale(1)}}
+.tile.nope{animation:wig .4s}
+@keyframes wig{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.hint{text-align:center;font-weight:900;font-size:16px;color:var(--ink);background:var(--glass);border:2px solid var(--glass-line);border-radius:18px;padding:10px 14px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s}
+.hint.soon{background:#fff3d6}
+
+/* ---- trace screen ---- */
+.topbar{display:flex;align-items:center;gap:10px}
+.round{border:2px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--ink);
+  border-radius:999px;font-family:var(--display);font-weight:900;font-size:17px;padding:9px 16px;cursor:pointer;box-shadow:0 5px 0 rgba(160,105,30,.25);display:flex;align-items:center;gap:6px}
+.round:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(160,105,30,.25)}
+.round svg{width:22px;height:22px}
+.spacer{flex:1}
+.board{position:relative;background:var(--board);border-radius:34px;padding:12px;box-shadow:0 10px 0 rgba(170,115,40,.35),0 20px 34px rgba(90,45,0,.22)}
+.board-head{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 0;gap:10px}
+.letter-name{font-weight:900;font-size:24px;line-height:1.1}
+.letter-name small{display:block;font-size:13px;font-weight:800;color:var(--ink-soft)}
+.steps{display:flex;gap:6px}
+.steps i{width:14px;height:14px;border-radius:50%;background:var(--track);box-shadow:inset 0 -3px 0 var(--track-shadow);transition:.3s}
+.steps i.done{background:var(--ok);box-shadow:inset 0 -3px 0 var(--ok-dark)}
+.steps i.now{background:var(--gold);box-shadow:inset 0 -3px 0 var(--gold-dark);transform:scale(1.25)}
+svg#pad{display:block;width:100%;height:auto;max-width:100%;aspect-ratio:1/1;touch-action:none;cursor:pointer}
+.tip{min-height:50px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:clamp(17px,5vw,21px);
+  background:var(--glass);border:2px solid var(--glass-line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:20px;padding:8px 14px;transition:background .25s,color .25s}
+.tip.oops{background:#ffe6e2;color:var(--oops);animation:shake .4s}
+.tip.good{background:#e2f8e9;color:var(--ok-dark)}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.win{position:absolute;inset:0;border-radius:34px;background:rgba(255,252,244,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.win .big{width:42%;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+.win h2{margin:0;font-size:clamp(28px,9vw,40px);font-weight:900;color:var(--ok);text-shadow:0 4px 0 #bdf0cf}
+@keyframes pop{0%{transform:scale(0) rotate(-30deg)}100%{transform:scale(1) rotate(0)}}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{border:0;border-radius:999px;padding:13px 26px;font-family:var(--display);font-weight:900;font-size:19px;color:#fff;background:var(--ok);box-shadow:0 6px 0 var(--ok-dark);cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 6px 0 var(--track-shadow);font-size:16px;padding:10px 20px}
+.sign{text-align:center;font-size:12px;font-weight:800;color:var(--ink-soft)}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+@media (min-width:640px){.app{max-width:760px}.grid{grid-template-columns:repeat(7,1fr)}#trace{max-width:520px;margin:0 auto}}
+@media (prefers-reduced-motion:reduce){.glyph,.glint i,.tile.open::before{animation:none}}
+</style>
+
+<div class="glint" aria-hidden="true" id="glint"></div>
+<canvas id="fx"></canvas>
+
+<div class="app">
+  <!-- HOME -->
+  <section class="screen" id="home">
+    <header>
+      <div><div class="brand">Нур Арабик</div><h1>Выбери букву</h1></div>
+      <div class="stars" aria-label="Звёзды"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z" fill="#ffc23a" stroke="#d98f00" stroke-width="1.6" stroke-linejoin="round"/></svg><b class="starCount">0</b> / <span id="openCount">3</span></div>
+    </header>
+    <div class="hint" id="hint">Нажми на светящуюся букву 👆</div>
+    <div class="grid" id="grid"></div>
+    <div class="sign">Анар Джаксылыкова · Нур Арабик</div>
+  </section>
+
+  <!-- TRACE -->
+  <section class="screen" id="trace" hidden>
+    <div class="topbar">
+      <button class="round" id="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Буквы</button>
+      <div class="spacer"></div>
+      <button class="round" id="say" aria-label="Послушать букву"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>Слушать</button>
+    </div>
+    <div class="board">
+      <div class="board-head">
+        <div class="letter-name" id="lname"></div>
+        <div class="steps" id="steps"></div>
+      </div>
+      <svg id="pad" viewBox="0 0 300 300" aria-label="Поле для обводки буквы"></svg>
+      <div class="win" id="win" hidden>
+        <svg class="big" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z" fill="#ffc23a" stroke="#d98f00" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <h2>Молодец!</h2>
+        <div class="row">
+          <button class="btn ghost" id="again">Ещё раз</button>
+          <button class="btn" id="toHome">К буквам</button>
+        </div>
+      </div>
+    </div>
+    <div class="tip" id="tip">Начни с зелёной точки 👆</div>
+    <div class="sign">Анар Джаксылыкова · Нур Арабик</div>
+  </section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const SND={"ب": "https://motion-sites.github.io/nur-assets/ba.mp3", "ج": "https://motion-sites.github.io/nur-assets/jim.mp3", "ل": "https://motion-sites.github.io/nur-assets/lam.mp3", "ا": "https://motion-sites.github.io/nur-assets/alif.mp3", "ث": "https://motion-sites.github.io/nur-assets/tha.mp3", "ت": "https://motion-sites.github.io/nur-assets/ta.mp3", "ح": "https://motion-sites.github.io/nur-assets/ha.mp3", "د": "https://motion-sites.github.io/nur-assets/dal.mp3", "ذ": "https://motion-sites.github.io/nur-assets/dhal.mp3", "ض": "https://motion-sites.github.io/nur-assets/dad.mp3", "ر": "https://motion-sites.github.io/nur-assets/ra.mp3", "ط": "https://motion-sites.github.io/nur-assets/tah.mp3", "ق": "https://motion-sites.github.io/nur-assets/qaf.mp3", "ش": "https://motion-sites.github.io/nur-assets/shin.mp3", "خ": "https://motion-sites.github.io/nur-assets/kha.mp3", "ف": "https://motion-sites.github.io/nur-assets/fa.mp3", "ز": "https://motion-sites.github.io/nur-assets/zay.mp3", "غ": "https://motion-sites.github.io/nur-assets/ghayn.mp3", "ك": "https://motion-sites.github.io/nur-assets/kaf.mp3", "س": "https://motion-sites.github.io/nur-assets/sin.mp3", "ص": "https://motion-sites.github.io/nur-assets/sad.mp3", "ظ": "https://motion-sites.github.io/nur-assets/zah.mp3", "ع": "https://motion-sites.github.io/nur-assets/ayn.mp3", "م": "https://motion-sites.github.io/nur-assets/mim.mp3", "ن": "https://motion-sites.github.io/nur-assets/nun.mp3", "ه": "https://motion-sites.github.io/nur-assets/ha2.mp3", "و": "https://motion-sites.github.io/nur-assets/waw.mp3", "ي": "https://motion-sites.github.io/nur-assets/ya.mp3"};
+const PAL=[['#3aa8f0','#1f78bd','#a8dbff'],['#ff8a2a','#cc5e0a','#ffc79a'],['#f0509a','#bf2f72','#ffb0d4'],
+           ['#34c46e','#1f914d','#a4ecc0'],['#9a6bf0','#6b42c2','#d4c0ff'],['#f5b82e','#c4850a','#ffe2a0'],['#ef4040','#b5222a','#ffb0ac']];
+const ALPHA=[['ا','Алиф'],['ب','Ба'],['ت','Та'],['ث','Са'],['ج','Джим'],['ح','Ха'],['خ','Хо'],['د','Даль'],['ذ','Заль'],['ر','Ро'],
+  ['ز','Зай'],['س','Син'],['ش','Шин'],['ص','Сод'],['ض','Дод'],['ط','То'],['ظ','Зо'],['ع','Айн'],['غ','Гойн'],['ف','Фа'],
+  ['ق','Коф'],['ك','Каф'],['ل','Лям'],['م','Мим'],['ن','Нун'],['ه','Ха'],['و','Уау'],['ي','Йа']];
+// tracing paths, strokes in real writing order (right to left)
+const TRACE={
+  'ب':{pal:0,strokes:[{type:'line',d:'M 246 112 C 252 170 238 198 190 200 L 112 200 C 66 200 50 178 56 128'},{type:'dot',x:150,y:248}]},
+  'ج':{pal:1,strokes:[{type:'line',d:'M 92 84 C 138 70 186 70 216 86 C 150 110 84 150 90 205 C 96 256 172 270 232 248'},{type:'dot',x:158,y:172}]},
+  'ل':{pal:2,strokes:[{type:'line',d:'M 200 44 L 200 188 C 200 244 160 260 120 256 C 84 252 68 226 74 198'}]}
+};
+(function(){
+  const L=d=>({type:'line',d}),D=(x,y,r)=>({type:'dot',x,y,r:r||20});
+  const BA='M 246 112 C 252 170 238 198 190 200 L 112 200 C 66 200 50 178 56 128';
+  const JIM='M 92 84 C 138 70 186 70 216 86 C 150 110 84 150 90 205 C 96 256 172 270 232 248';
+  const DAL='M 130 80 C 160 110 205 160 205 192 C 205 206 190 210 170 210 L 92 210';
+  const RA='M 196 92 C 206 140 200 196 150 228 C 126 243 98 250 72 250';
+  const SIN='M 266 104 L 266 150 C 266 176 230 176 228 132 C 230 176 194 176 192 132 C 192 172 190 210 140 214 C 92 218 56 200 52 152';
+  const SAD='M 152 170 C 150 112 272 100 270 152 C 268 176 214 172 152 170 C 136 170 132 158 132 140 C 132 192 116 226 84 226 C 56 226 42 206 44 168';
+  const TAH='M 70 214 C 84 150 252 124 252 186 C 252 214 222 214 70 214';
+  const STICK='M 112 46 L 112 206';
+  const AYN='M 204 86 C 166 62 112 88 132 126 C 142 144 176 148 212 140 C 150 152 94 182 96 220 C 100 262 176 268 236 248';
+  const FA='M 228 160 C 196 160 196 112 226 110 C 256 110 258 152 230 168 C 200 186 102 192 72 178 C 56 170 50 152 52 128';
+  const QAF='M 214 126 C 184 126 184 82 214 82 C 244 82 246 124 222 138 C 228 180 222 234 160 236 C 100 238 70 204 74 162';
+  const KAF='M 228 56 L 228 186 C 228 210 212 216 186 216 L 100 216 C 70 216 58 200 60 172';
+  Object.assign(TRACE,{
+    'ا':{pal:5,strokes:[L('M 150 48 L 150 252')]},
+    'ت':{pal:2,strokes:[L(BA),D(128,148,17),D(172,148,17)]},
+    'ث':{pal:6,strokes:[L(BA),D(128,158,16),D(172,158,16),D(150,120,16)]},
+    'ح':{pal:0,strokes:[L(JIM)]},
+    'خ':{pal:2,strokes:[L(JIM),D(152,36)]},
+    'د':{pal:6,strokes:[L(DAL)]},
+    'ذ':{pal:1,strokes:[L(DAL),D(118,44)]},
+    'ر':{pal:0,strokes:[L(RA)]},
+    'ز':{pal:2,strokes:[L(RA),D(194,46)]},
+    'س':{pal:6,strokes:[L(SIN)]},
+    'ش':{pal:1,strokes:[L(SIN),D(229,72,15),D(197,72,15),D(213,42,15)]},
+    'ص':{pal:0,strokes:[L(SAD)]},
+    'ض':{pal:2,strokes:[L(SAD),D(212,82)]},
+    'ط':{pal:6,strokes:[L(TAH),L(STICK)]},
+    'ظ':{pal:1,strokes:[L(TAH),L(STICK),D(176,112)]},
+    'ع':{pal:0,strokes:[L(AYN)]},
+    'م':{pal:6,strokes:[L('M 172 108 C 132 108 132 172 172 172 C 212 172 212 108 172 108'),L('M 140 166 C 114 172 102 186 102 256')]},
+    'ن':{pal:1,strokes:[L('M 234 112 C 248 188 216 238 150 238 C 84 238 54 196 66 136'),D(150,150)]},
+    'ه':{pal:0,strokes:[L('M 158 74 C 104 104 76 168 98 210 C 120 252 202 252 218 204 C 232 160 204 110 158 74')]},
+    'و':{pal:2,strokes:[L('M 162 150 C 142 110 176 80 202 98 C 228 116 218 160 196 172 C 202 206 172 246 92 256')]},
+    'ي':{pal:6,strokes:[L('M 234 70 C 200 62 176 90 196 116 C 212 138 252 150 238 186 C 222 222 140 224 92 210 C 60 200 52 176 74 160'),D(128,258,16),D(170,258,16)]},
+    'غ':{pal:2,strokes:[L(AYN),D(166,36)]},
+    'ف':{pal:6,strokes:[L(FA),D(226,62)]},
+    'ق':{pal:1,strokes:[L(QAF),D(194,40,17),D(236,40,17)]},
+    'ك':{pal:0,strokes:[L(KAF),L('M 174 112 C 146 118 172 142 140 150')]}
+  });
+})();
+const $=id=>document.getElementById(id);
+let won={};try{won=JSON.parse(localStorage.getItem('nur-trace-won')||'{}')}catch(e){}
+
+/* glints */
+for(let i=0;i<14;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=(-Math.random()*3)+'s';$('glint').appendChild(s)}
+
+/* ---------- audio ---------- */
+let ac=null,voice=null;
+function tone(f,dur=.12,type='sine',vol=.12){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+  const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(vol,ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+dur);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+dur)}catch(e){}}
+const chord=()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.25,'triangle',.14),i*110));
+function speak(ch){try{if(voice){voice.pause()}voice=new Audio(SND[ch]);voice.play().catch(()=>{})}catch(e){}}
+
+/* ---------- home ---------- */
+function palFor(ch,i){return PAL[TRACE[ch]?TRACE[ch].pal:i%PAL.length]}
+const STAR='<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z" fill="#ffc23a" stroke="#d98f00" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="#a07040" stroke-width="2.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5" fill="#e9cfa4" stroke="#a07040"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+function renderHome(){
+  const g=$('grid');g.innerHTML='';
+  ALPHA.forEach(([ch,name],i)=>{
+    const [c,cd]=palFor(ch,i), open=!!TRACE[ch];
+    const b=document.createElement('button');b.id='t'+i;
+    b.className='tile '+(open?(won[ch]?'':'open'):'locked');
+    b.setAttribute('aria-label',name+(open?'':' — скоро'));
+    b.innerHTML=`<span class="glyph" data-ch="${ch}" style="--c:${c};--cd:${cd};--dur:${(2.4+(i*37%10)/10).toFixed(1)}s;--del:${(-(i*53%30)/10).toFixed(1)}s">${ch}</span>`+
+      (open?(won[ch]?`<span class="badge">${STAR}</span>`:''):`<span class="badge lock">${LOCK}</span>`);
+    b.onclick=()=>{
+      if(!open){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');tone(240,.12,'triangle',.08);
+        $('hint').textContent='Буква «'+name+'» откроется в курсе 🔒';$('hint').className='hint soon';return}
+      b.classList.add('bounce');speak(ch);tone(700,.08,'triangle',.08);
+      setTimeout(()=>{b.classList.remove('bounce');openTrace(ch,name)},420);
+    };
+    g.appendChild(b);
+  });
+  document.querySelectorAll('.starCount').forEach(e=>e.textContent=Object.keys(won).length);
+  $('openCount').textContent=Object.keys(TRACE).length;
+  $('hint').textContent='Нажми на светящуюся букву 👆';$('hint').className='hint';
+}
+function goHome(){cancelAnimationFrame(hintRAF);$('trace').hidden=true;$('home').hidden=false;renderHome();scrollTo(0,0)}
+$('back').onclick=goHome;$('toHome').onclick=goHome;
+$('again').onclick=()=>build();
+$('say').onclick=()=>speak(curCh);
+
+/* ---------- trace ---------- */
+const pad=$('pad'),tip=$('tip');
+let curCh='ب',curName='Ба',stepIdx=0,prog=0,samples=[],drawing=false,hintRAF=0,layers=null,lastBeep=0;
+function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||pad).appendChild(e);return e}
+function setTip(t,cls){tip.textContent=t;tip.className='tip'+(cls?' '+cls:'')}
+function openTrace(ch,name){curCh=ch;curName=name;$('home').hidden=true;$('trace').hidden=false;scrollTo(0,0);build()}
+
+function build(){
+  cancelAnimationFrame(hintRAF);
+  const T=TRACE[curCh],[C,CD,LI]=PAL[T.pal];pad.innerHTML='';stepIdx=0;prog=0;$('win').hidden=true;
+  $('lname').innerHTML=curName+'<small>буква '+curCh+'</small>';
+  const defs=el('defs',{});const g=el('radialGradient',{id:'gl',cx:'35%',cy:'30%',r:'70%'},defs);
+  el('stop',{offset:'0%','stop-color':LI},g);el('stop',{offset:'100%','stop-color':C},g);
+  for(let y=30;y<300;y+=30)for(let x=30;x<300;x+=30)el('circle',{cx:x,cy:y,r:1.6,fill:'var(--dotgrid)'});
+  layers=T.strokes.map(s=>{
+    if(s.type==='line'){
+      el('path',{d:s.d,fill:'none',stroke:'var(--track-shadow)','stroke-width':40,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate(0 6)'});
+      el('path',{d:s.d,fill:'none',stroke:'var(--track)','stroke-width':40,'stroke-linecap':'round','stroke-linejoin':'round'});
+      el('path',{d:s.d,fill:'none',stroke:'#dcc39e','stroke-width':4,'stroke-linecap':'round','stroke-dasharray':'2 12'});
+      const sh=el('path',{d:s.d,fill:'none',stroke:CD,'stroke-width':34,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate(0 6)'});
+      const main=el('path',{d:s.d,fill:'none',stroke:C,'stroke-width':34,'stroke-linecap':'round','stroke-linejoin':'round'});
+      const hi=el('path',{d:s.d,fill:'none',stroke:'rgba(255,255,255,.6)','stroke-width':8,'stroke-linecap':'round',transform:'translate(-4 -8)'});
+      const len=main.getTotalLength();[sh,main,hi].forEach(p=>{p.style.strokeDasharray=len+' '+len;p.style.strokeDashoffset=len});
+      return {s,len,fill:[sh,main,hi],ref:main};
+    }
+    const R=s.r||20;el('circle',{cx:s.x,cy:s.y+6,r:R,fill:'var(--track-shadow)'});
+    const base=el('circle',{cx:s.x,cy:s.y,r:R,fill:'var(--track)',stroke:'#dcc39e','stroke-width':3,'stroke-dasharray':'3 6'});
+    const dsh=el('circle',{cx:s.x,cy:s.y+6,r:0,fill:CD});const dot=el('circle',{cx:s.x,cy:s.y,r:0,fill:'url(#gl)'});
+    el('circle',{cx:s.x-6,cy:s.y-7,r:0,fill:'rgba(255,255,255,.7)'});
+    return {s,base,dot,dsh,C,R};
+  });
+  layers.marker=el('g',{});
+  el('circle',{r:17,fill:'#2fbf68',stroke:'#fff','stroke-width':5},layers.marker);
+  el('path',{d:'M -5 -7 L 6 0 L -5 7 Z',fill:'#fff'},layers.marker);
+  layers.ring=el('circle',{r:17,fill:'none',stroke:'#2fbf68','stroke-width':4,opacity:.6},layers.marker);
+  layers.finger=el('text',{'font-size':40,'text-anchor':'middle',opacity:0});layers.finger.textContent='👆';
+  renderSteps();startStep();
+}
+function renderSteps(){const box=$('steps');box.innerHTML='';TRACE[curCh].strokes.forEach((s,i)=>{const d=document.createElement('i');if(i<stepIdx)d.className='done';else if(i===stepIdx)d.className='now';box.appendChild(d)})}
+function startStep(){
+  const ly=layers[stepIdx];prog=0;
+  if(ly.s.type==='line'){
+    samples=[];for(let l=0;l<=ly.len;l+=3){const p=ly.ref.getPointAtLength(l);samples.push({x:p.x,y:p.y,l})}
+    const p0=samples[0];layers.marker.setAttribute('transform',`translate(${p0.x} ${p0.y})`);layers.marker.style.display='';
+    setTip(stepIdx===0?'Начни с зелёной точки 👆':'Теперь следующая линия 👆');runHint(ly);
+  }else{layers.marker.style.display='none';ly.base.setAttribute('stroke',ly.C);setTip('А теперь поставь точку! Нажми 👇');pulseDot(ly)}
+}
+function runHint(ly){cancelAnimationFrame(hintRAF);const t0=performance.now(),f=layers.finger;
+  const loop=t=>{const k=((t-t0)/2200)%1.3,p=ly.ref.getPointAtLength(Math.min(k,1)*ly.len);
+    f.setAttribute('x',p.x+14);f.setAttribute('y',p.y+38);f.setAttribute('opacity',k>1?0:.9);
+    const r=17+((t/40)%12);layers.ring.setAttribute('r',r);layers.ring.setAttribute('opacity',1-(r-17)/12);hintRAF=requestAnimationFrame(loop)};
+  hintRAF=requestAnimationFrame(loop)}
+function pulseDot(ly){cancelAnimationFrame(hintRAF);layers.finger.setAttribute('opacity',0);
+  const loop=t=>{ly.base.setAttribute('r',ly.R+Math.sin(t/180)*3);hintRAF=requestAnimationFrame(loop)};hintRAF=requestAnimationFrame(loop)}
+
+function pt(e){return new DOMPoint(e.clientX,e.clientY).matrixTransform(pad.getScreenCTM().inverse())}
+function nearest(p,from,to){let bi=-1,bd=1e9;for(let i=Math.max(0,from);i<=Math.min(samples.length-1,to);i++){const s=samples[i],d=Math.hypot(s.x-p.x,s.y-p.y);if(d<bd){bd=d;bi=i}}return{i:bi,d:bd}}
+function showMarker(){const s=samples[prog];layers.marker.setAttribute('transform',`translate(${s.x} ${s.y})`);layers.marker.style.display=''}
+pad.addEventListener('pointerdown',e=>{
+  if(!$('win').hidden)return;const ly=layers[stepIdx],p=pt(e);
+  if(ly.s.type==='dot'){if(Math.hypot(p.x-ly.s.x,p.y-ly.s.y)<(ly.R+14))finishDot(ly);else setTip('Точка тут, где мигает кружок 🙂','oops');return}
+  const n=nearest(p,prog-4,prog+10);
+  if(n.d<36){drawing=true;pad.setPointerCapture(e.pointerId);cancelAnimationFrame(hintRAF);layers.finger.setAttribute('opacity',0);
+    layers.marker.style.display='none';setTip('Веди пальчик по дорожке…');advance(n.i,p)}
+  else setTip(prog===0?'Начни с зелёной точки 👆':'Продолжи там, где остановился 👆','oops');
+});
+pad.addEventListener('pointermove',e=>{if(!drawing)return;const p=pt(e),n=nearest(p,prog-6,prog+16);
+  if(n.d<34)advance(n.i,p);
+  else if(n.d>52){drawing=false;tone(220,.15,'square',.05);setTip('Ой! Не выходи из дорожки 🙂','oops');showMarker()}});
+['pointerup','pointercancel'].forEach(t=>pad.addEventListener(t,()=>{if(drawing){drawing=false;
+  if(layers[stepIdx]&&layers[stepIdx].s.type==='line'&&prog<samples.length-1){showMarker();setTip('Продолжай с зелёной точки 👆')}}}));
+function advance(i,p){if(i<=prog)return;prog=i;const ly=layers[stepIdx];
+  ly.fill.forEach(f=>f.style.strokeDashoffset=Math.max(0,ly.len-samples[prog].l));sparkle(p);
+  if(prog-lastBeep>12){lastBeep=prog;tone(400+prog*2,.06,'triangle',.06)}
+  if(prog>=samples.length-3){drawing=false;lastBeep=0;ly.fill.forEach(f=>f.style.strokeDashoffset=0);tone(880,.18,'triangle',.12);nextStep()}}
+function finishDot(ly){cancelAnimationFrame(hintRAF);ly.base.setAttribute('r',ly.R);const hl=ly.dot.nextSibling;
+  let r=0;const grow=()=>{r+=2.2;const v=Math.min(r,ly.R-1);ly.dot.setAttribute('r',v);ly.dsh.setAttribute('r',v);if(hl)hl.setAttribute('r',v*.28);if(r<ly.R-1)requestAnimationFrame(grow)};grow();
+  const b=pad.getBoundingClientRect();burst(b.left+ly.s.x/300*b.width,b.top+ly.s.y/300*b.height,24);tone(988,.15,'triangle',.12);nextStep()}
+function nextStep(){stepIdx++;renderSteps();if(stepIdx>=layers.length){setTimeout(win,450);return}setTip('Отлично! 🌟','good');setTimeout(startStep,700)}
+function win(){won[curCh]=1;try{localStorage.setItem('nur-trace-won',JSON.stringify(won))}catch(e){}
+  chord();setTimeout(()=>speak(curCh),650);$('win').hidden=false;setTip('Ты написал букву '+curName+'!','good');
+  for(let i=0;i<4;i++)setTimeout(()=>burst(innerWidth*(.2+Math.random()*.6),innerHeight*(.25+Math.random()*.3),40),i*180)}
+
+/* ---------- sparkles ---------- */
+const cv=$('fx'),cx=cv.getContext('2d');let parts=[];
+function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+addEventListener('resize',size);size();
+const COLS=['#ffc23a','#f0509a','#34c46e','#ff8a2a','#3aa8f0','#ffffff'];
+function sparkle(p){const b=pad.getBoundingClientRect();if(Math.random()<.5)parts.push({x:b.left+p.x/300*b.width,y:b.top+p.y/300*b.height,vx:(Math.random()-.5)*3,vy:-Math.random()*3,life:30,c:COLS[(Math.random()*6)|0],s:3+Math.random()*4,star:true})}
+function burst(x,y,n){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=3+Math.random()*6;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3,life:60+Math.random()*30,c:COLS[(Math.random()*6)|0],s:5+Math.random()*6,star:Math.random()<.4})}}
+function starPath(x,y,r){cx.beginPath();for(let i=0;i<10;i++){const a=i*Math.PI/5-Math.PI/2,rr=i%2?r*.45:r;cx.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}cx.closePath()}
+(function tick(){cx.clearRect(0,0,innerWidth,innerHeight);parts=parts.filter(p=>p.life-->0);
+  for(const p of parts){p.x+=p.vx;p.y+=p.vy;p.vy+=.18;cx.globalAlpha=Math.min(1,p.life/25);cx.fillStyle=p.c;if(p.star){starPath(p.x,p.y,p.s);cx.fill()}else cx.fillRect(p.x,p.y,p.s,p.s*.6)}
+  cx.globalAlpha=1;requestAnimationFrame(tick)})();
+
+for(const k of Object.keys(TRACE))if(k!=="ب")delete TRACE[k];
+const __w=win;win=function(){__w();setTimeout(()=>{if(document.getElementById("cta"))return;const b=document.createElement("a");b.id="cta";b.className="btn";b.textContent="Все буквы — в курсе 💛";b.href="../#enroll";b.target="_top";b.style.textDecoration="none";document.querySelector("#win .row").appendChild(b)},300)};
+renderHome();
+</script>
+
+</body></html>
