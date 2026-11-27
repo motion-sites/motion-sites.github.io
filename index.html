@@ -1156,15 +1156,13 @@ h1,h2,h3,b,strong{color:inherit}
 .st-stats span{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.25}
 .st-grid{display:flex;gap:12px;align-items:flex-start;margin-top:26px}.st-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column}
 @media(min-width:900px){.st-grid{gap:18px}}
-.st-c{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit;position:relative;opacity:0;transform:translateY(28px) scale(.96);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
-.st-c.in{opacity:1;transform:none}
+.st-c{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit;position:relative;opacity:1}
 .st-ph{position:relative;border-radius:16px;overflow:visible}
-.st-ph img{display:block;width:100%;height:auto;border-radius:16px;background:#f3ece6;box-shadow:0 14px 30px rgba(0,0,0,.45);position:relative;z-index:2;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.st-c.multi .st-ph::before,.st-c.multi .st-ph::after{content:"";position:absolute;inset:6px 6px -6px 6px;border-radius:16px;background:#e9ddd5;z-index:1;transform:rotate(3deg);transition:transform .5s}
+.st-ph img{display:block;width:100%;height:auto;border-radius:16px;background:#f3ece6;box-shadow:0 10px 22px rgba(0,0,0,.4);position:relative;z-index:2}
+.st-c.multi .st-ph::before,.st-c.multi .st-ph::after{content:"";position:absolute;inset:6px 6px -6px 6px;border-radius:16px;background:#e9ddd5;z-index:1;transform:rotate(3deg)}
 .st-c.multi .st-ph::after{background:#d9c8bf;transform:rotate(-3deg);z-index:0}
-.st-c:hover .st-ph img,.st-c:focus-visible .st-ph img{transform:translateY(-6px) rotate(-1deg)}
-.st-c:hover .st-ph::before{transform:rotate(6deg) translateX(6px)}.st-c:hover .st-ph::after{transform:rotate(-6deg) translateX(-6px)}
-.st-bd{position:absolute;top:10px;left:10px;z-index:3;background:rgba(26,7,9,.82);color:var(--glow);font-size:11px;font-weight:700;padding:5px 9px;border-radius:99px;backdrop-filter:blur(6px)}
+
+.st-bd{position:absolute;top:10px;left:10px;z-index:3;background:rgba(26,7,9,.82);color:var(--glow);font-size:11px;font-weight:700;padding:5px 9px;border-radius:99px}
 .st-c h3{margin:12px 2px 2px;font-size:15px;line-height:1.25}
 .st-c small{display:block;margin:0 2px;color:var(--muted);font-size:12.5px}
 .st-c q{display:block;margin:8px 2px 0;font-size:13px;color:var(--glow);font-style:italic}
@@ -2069,7 +2067,7 @@ const REV=[
  {r:"Ученица",t:"Послушала ваши голосовые и поняла: <mark>нужно очень тонко писать чату все тонкости</mark>"}];
 {
  const g=$("stGrid");
- if(g){const card=(w,i)=>`<button type="button" class="st-c${w.p.length>1?" multi":""}" data-i="${i}"><div class="st-ph"><span class="st-bd">${w.b}</span><img src="${sI(w.p[0])}" alt="${w.t}" loading="lazy"></div><h3>${w.t}</h3><small>${w.s}</small>${w.q?`<q>${w.q}</q>`:""}</button>`;
+ if(g){const card=(w,i)=>`<button type="button" class="st-c${w.p.length>1?" multi":""}" data-i="${i}"><div class="st-ph"><span class="st-bd">${w.b}</span><img src="${sI(w.p[0])}" alt="${w.t}" decoding="async"></div><h3>${w.t}</h3><small>${w.s}</small>${w.q?`<q>${w.q}</q>`:""}</button>`;
   const nc=innerWidth>=900?3:2;let cols=Array.from({length:nc},()=>[]);SW.forEach((w,i)=>cols[i%nc].push(card(w,i)));
   g.innerHTML=cols.map(c=>`<div class="st-col">${c.join("")}</div>`).join("");
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const d=(+e.target.dataset.i%2)*120;setTimeout(()=>e.target.classList.add("in"),d);io.unobserve(e.target)}}),{threshold:.12});
