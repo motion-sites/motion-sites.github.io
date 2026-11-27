@@ -2064,7 +2064,6 @@ const SW=[
  {t:"Тетрадь с заданиями в дорогу",s:"Для дочки · 10 заданий",b:"PDF",p:["trip-1","trip-2","trip-3","trip-4","trip-5","trip-6","trip-7"]},
  {t:"Карточки ингушского алфавита",s:"46 карточек",b:"PDF",p:["cards-1","cards-2","cards-3","cards-4"]},
  {t:"Афиша «Подготовка к школе»",s:"Реклама для набора учеников",b:"Реклама",p:["school"]},
- {t:"Реклама для мастера окрашивания",s:"Пост для Instagram",b:"Реклама",p:["hair"]},
  {t:"Реклама подписки ChatGPT Plus",s:"Пост для продаж",b:"Реклама",p:["gpt"]}];
 const sI=k=>"st/"+k+".jpg";
 const REV=[
@@ -2107,7 +2106,7 @@ const REV=[
   new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting&&!started){started=true;o.disconnect();run()}}),{threshold:.2}).observe(el)}
  chat($("chat1"));chat($("chat2"));
  /* home marquee */
- const mq=$("stMq");if(mq){const ks=["ingush","jamal-0","mim-1","balk-1","book-2","trip-1","school","cards-1","hair","balk-2","gpt","jamal-1"];const h=ks.map(k=>`<img src="${sI(k)}" alt="">`).join("");mq.innerHTML=h+h}
+ const mq=$("stMq");if(mq){const ks=["ingush","jamal-0","mim-1","balk-1","book-2","trip-1","school","cards-1","balk-2","gpt","jamal-1"];const h=ks.map(k=>`<img src="${sI(k)}" alt="">`).join("");mq.innerHTML=h+h}
 }
 {const tt=document.getElementById("totop");if(tt)document.body.appendChild(tt);const br=document.querySelector(".bar");if(br)document.body.appendChild(br)}
 apply(true);
