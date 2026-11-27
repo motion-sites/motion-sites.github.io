@@ -1154,9 +1154,9 @@ h1,h2,h3,b,strong{color:inherit}
 .st-stats div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 8px;text-align:center}
 .st-stats b{display:block;font-family:var(--display);font-size:clamp(34px,9vw,52px);line-height:1;color:var(--glow)}
 .st-stats span{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.25}
-.st-grid{columns:2 170px;column-gap:12px;margin-top:26px}
-@media(min-width:900px){.st-grid{columns:3 220px;column-gap:18px}}
-.st-c{break-inside:avoid;display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit;position:relative;opacity:0;transform:translateY(28px) scale(.96);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.st-grid{display:flex;gap:12px;align-items:flex-start;margin-top:26px}.st-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column}
+@media(min-width:900px){.st-grid{gap:18px}}
+.st-c{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit;position:relative;opacity:0;transform:translateY(28px) scale(.96);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .st-c.in{opacity:1;transform:none}
 .st-ph{position:relative;border-radius:16px;overflow:visible}
 .st-ph img{display:block;width:100%;height:auto;border-radius:16px;background:#f3ece6;box-shadow:0 14px 30px rgba(0,0,0,.45);position:relative;z-index:2;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
@@ -2069,7 +2069,9 @@ const REV=[
  {r:"Ученица",t:"Послушала ваши голосовые и поняла: <mark>нужно очень тонко писать чату все тонкости</mark>"}];
 {
  const g=$("stGrid");
- if(g){g.innerHTML=SW.map((w,i)=>`<button type="button" class="st-c${w.p.length>1?" multi":""}" data-i="${i}"><div class="st-ph"><span class="st-bd">${w.b}</span><img src="${sI(w.p[0])}" alt="${w.t}" loading="lazy"></div><h3>${w.t}</h3><small>${w.s}</small>${w.q?`<q>${w.q}</q>`:""}</button>`).join("");
+ if(g){const card=(w,i)=>`<button type="button" class="st-c${w.p.length>1?" multi":""}" data-i="${i}"><div class="st-ph"><span class="st-bd">${w.b}</span><img src="${sI(w.p[0])}" alt="${w.t}" loading="lazy"></div><h3>${w.t}</h3><small>${w.s}</small>${w.q?`<q>${w.q}</q>`:""}</button>`;
+  const nc=innerWidth>=900?3:2;let cols=Array.from({length:nc},()=>[]);SW.forEach((w,i)=>cols[i%nc].push(card(w,i)));
+  g.innerHTML=cols.map(c=>`<div class="st-col">${c.join("")}</div>`).join("");
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const d=(+e.target.dataset.i%2)*120;setTimeout(()=>e.target.classList.add("in"),d);io.unobserve(e.target)}}),{threshold:.12});
   g.querySelectorAll(".st-c").forEach(c=>{io.observe(c);c.onclick=()=>openLb(+c.dataset.i)})}
  /* lightbox */
