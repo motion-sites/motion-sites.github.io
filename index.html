@@ -1274,6 +1274,14 @@ h1,h2,h3,b,strong{color:inherit}
 [data-v="course"] .mkx-me :is(small,span,b,em,.mkx-s){color:#fff!important}
 [data-v="course"] .paybox :is(p,.note2){color:#5A3B38!important}
 [data-v="course"] .paybox b{color:#2A1418!important}
+
+@media (max-width:900px),(hover:none){
+ *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+ #sky{display:none!important}
+ .rv.pre{filter:none!important}
+ .rv{transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)!important}
+ .top,.top.solid,.bar{background:rgba(26,7,9,.97)!important}
+}
 </style>
 </head>
 <body>
@@ -2126,7 +2134,7 @@ totop.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});
 route();
 
 /* living background: dim orbs + slowly falling laptops, phones and AI sparkles linked together */
-(function(){const cv=document.getElementById("sky"),x=cv.getContext("2d");let w,h,dpr,t=0;
+(function(){const cv=document.getElementById("sky");if(!cv||matchMedia("(max-width:900px),(hover:none)").matches)return;const x=cv.getContext("2d");let w,h,dpr,t=0;
  function rs(){dpr=Math.min(2,devicePixelRatio||1);w=innerWidth;h=innerHeight;cv.width=w*dpr;cv.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
  rs();addEventListener("resize",rs);
  const orbs=[{x:.85,y:.15,r:.45,c:"230,174,158",a:.06,s:.00012},{x:.1,y:.55,r:.4,c:"246,205,189",a:.035,s:.0001},{x:.7,y:.9,r:.5,c:"140,26,40",a:.12,s:.00008}];
